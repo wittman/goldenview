@@ -1,0 +1,21 @@
+<script src="fancysettings/source/lib/store.js"></script>
+<script>
+var settings = new Store("settings", {
+	
+	"user_mute": true,
+	"default_circle": true,
+	"hide_comments": chrome.i18n.getMessage("options_hide_comments_default_show"),
+	"hide_images": true,
+	"search_with_google": true
+	
+});
+</script>
+<script>
+function onRequest(request, sender, callback) {
+	if (request.name == 'settings')
+		callback(settings.toObject());
+};
+
+// Wire up the listener.
+chrome.extension.onRequest.addListener(onRequest);
+</script>
