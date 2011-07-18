@@ -6,7 +6,7 @@
 		"matches": [ "http://plus.google.com/*", "https://plus.google.com/*" ],
 		"run_at": "document_start"
 	} ],
-	"description": "Google+ enhancements with 5 (optionally enabled) modules:  – 1) User Mute - Mutes all posts by specific users. 2) Default Circle – Set a circle as default (instead of Stream). 3) Hide Images – Hide image: original and all shares. 4) Hide Comments – Hide comments (option hide all by default). 5) Search With Google – Search Google+ w/ Google Search.",
+	"description": "Google+ (Google Plus) enhancements: (optional) modules: User Mute, Default Circle, Hide Images, Hide comments, & Search w/ Google.",
 	"icons": {
 		"128": "icon128.png",
 		"16": "icon16.png",
