@@ -11,6 +11,12 @@
 
 Each module is based on a self-contained user script, also authored by Micah Wittman, developed and maintained for cross-platform use (Chrome, Firefox, and Safari). See more information about a module by going to it's code repository as linked to below.
 
+Home page for all the features contained in Golden View for Google+:
+
+> <http://wittman.org/google-plus-extensions/>.
+
+Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his excellent [Replies and more for Google+](https://chrome.google.com/webstore/detail/fgmhgfecnmeljhchgcjlfldjiepcfpea) Chrome extension / [project](http://code.google.com/p/buzz-plus/) which was used as a template to wire-up the original scripts as modules of the Golden View for Google+ extension.
+
 ## Modules
 
 ---
