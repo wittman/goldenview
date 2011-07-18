@@ -4,7 +4,7 @@ window.addEvent("domready", function () {
             window.open("https://github.com/wittman/goldenview/issues/new");
         });
         settings.manifest.extension_page.addEvent("action", function () {
-            window.open("https://chrome.google.com/webstore/detail/"); //TBA
+            window.open("https://chrome.google.com/webstore/detail/gijclepbhbekkghfmcdfkpmbkbefcokp");
         });
         settings.manifest.developer_page.addEvent("action", function () {
             window.open("http://wittman.org/+");
