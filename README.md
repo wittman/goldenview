@@ -47,3 +47,15 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 ### Search with Google
 
 > SEE <https://github.com/wittman/googleplusplus_search_with_google/>  
+
+
+## Change Log
+
+### Version 1.1
+
+- Default Circle module now allows navigation to The Stream by clicking Stream without setting it as default. NEW
+- Hide Images module now has option to hide images by default. NEW
+
+### Version 1.0
+
+- Initial Release
