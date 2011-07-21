@@ -51,6 +51,12 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.11
+
+- Fixed Hide Comments module - wasn't, functionally, language-independent. Also wasn't hiding emergent comments and not working in Incoming view. FIX
+- Hide Comments hide emergent comments now and updates the Recent and Old comment counts in real-time. NEW
+
+
 ### Version 1.1
 
 - Default Circle module now allows navigation to The Stream by clicking Stream without setting it as default. NEW
