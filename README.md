@@ -11,9 +11,17 @@
 
 Each module is based on a self-contained user script, also authored by Micah Wittman, developed and maintained for cross-platform use (Chrome, Firefox, and Safari). See more information about a module by going to it's code repository as linked to below.
 
+
+> Discussion on Google+: <https://plus.google.com/111309687695898923996/posts/LeQL1M3MqdP>
+
+> Chrome Web Store Install Page: <https://chrome.google.com/webstore/detail/gijclepbhbekkghfmcdfkpmbkbefcokp>
+
+> (short URL: <http://wittman.org/gv>)
+
 Home page for all the features contained in Golden View for Google+:
 
-> <http://wittman.org/google-plus-extensions/>.
+> <http://wittman.org/google-plus-extensions/>
+
 
 Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his excellent [Replies and more for Google+](https://chrome.google.com/webstore/detail/fgmhgfecnmeljhchgcjlfldjiepcfpea) Chrome extension / [project](http://code.google.com/p/buzz-plus/) which was used as a template to wire-up the original scripts as modules of the Golden View for Google+ extension.
 
@@ -50,6 +58,12 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 
 ## Change Log
+
+### Version 1.12
+
+- Hide Comments module - fixed comment editor being hidden unexpectedly in Hide by Default mode. FIX
+- Circle Default module - improved compatibility by converting unicode star characters to images. UPDATE
+- Circle Default module - added small amount of left padding to stars for small browser window width cases. UPDATE
 
 ### Version 1.11
 
