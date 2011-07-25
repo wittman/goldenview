@@ -232,7 +232,7 @@ function hideComments(hide_by_default){ // v0.2.1
 	setInterval(main_loop, 2000);
 }
 
-function defaultCircle(){ // v0.1.7
+function defaultCircle(){ // v0.1.8
 	var logging = false;
 
 	function log(txt) {
@@ -320,10 +320,20 @@ function defaultCircle(){ // v0.1.7
 			);
 		}
 	}
+	function img_star(filename){
+		return '<img alt="*" src="' + chrome.extension.getURL(filename) + '">';
+	}
+	function add_css(){
+		$('head').append('<style>'
+			+ 'a.gpp__default_circle { text-decoration:none; }'
+			+ 'a.gpp__default_circle img { border:none; }'
+		+'</style>'
+		);
+	}
 	function process_circles(t, default_circle_url, circle_link){
 		//Process Circles
 		if( default_circle_url == circle_link.attr('href') && t.find('.gpp__default_circle').length == 0 ){
-			t.prepend(' <a style="font-size:9px;position:absolute;margin-left:-34px;" class="gpp__default_circle">★</a>');
+			t.prepend(' <a style="font-size:9px;position:absolute;margin-left:-34px;" class="gpp__default_circle">' + STAR_SOLID + '</a>');
 			var set_button = t.parent().find('.gpp__default_circle:first');
 			set_button.click(function(){
 				var t = $(this);
@@ -429,7 +439,7 @@ function defaultCircle(){ // v0.1.7
 					var circle_link = t;
 					//Process Stream
 					if(stream.parent().find('.gpp__default_circle').length == 0){
-						stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">☆</a>');
+						stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_OUTLINE + '</a>');
 						var set_button = stream.parent().find('.gpp__default_circle:first');
 						set_button.click(function(){
 							GM_setValue('gpp__default_circle_url', '/stream');
@@ -455,10 +465,13 @@ function defaultCircle(){ // v0.1.7
 		
 	}
 	var allow_stream = false;
-	var STAR_SOLID = '<img alt="current default" src="' + chrome.extension.getURL('star-solid.png') + '">';
-	var STAR_OUTLINE = '<img alt="non-default" src="' + chrome.extension.getURL('star-outline.png') + '">';
-	var STAR_HOVER_SOLID = '<img alt="set default" src="' + chrome.extension.getURL('star-hover-solid.png') + '">';
-	var STAR_HOVER_OUTLINE = '<img alt="unset default" src="' + chrome.extension.getURL('star-hover-outline.png') + '">';
+	var STAR_SOLID = img_star('star-solid.png');
+	var STAR_OUTLINE = img_star('star-outline.png');
+	var STAR_HOVER_SOLID = img_star('star-hover-solid.png');
+	var STAR_HOVER_OUTLINE = img_star('star-hover-outline.png');
+	
+	/****** Execute before main_loop ******/
+	add_css();
 	
 	/****** Start main_loop ******/
 	setInterval(main_loop, 3000);

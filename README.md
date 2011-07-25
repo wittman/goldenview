@@ -59,6 +59,11 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.13
+
+- Circle Default module - all star characters now converted to images. FIX
+- Circle Default module - removed underline style seen while a star was hovered. UPDATE
+
 ### Version 1.12
 
 - Hide Comments module - fixed comment editor being hidden unexpectedly in Hide by Default mode. FIX
