@@ -59,9 +59,9 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
-### Version 1.14
+### Version 1.15
 
-- Star images replaced with transparency versions for better meshing with background. Thanks goes to extension user John (theiconmaster.com) for fixing the images. FIX
+- Recent change by Google required an adjustment to detect the user's name and the post ID. User Mute now fully functional again. FIX
 
 ### Version 1.13
 

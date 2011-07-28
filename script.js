@@ -477,7 +477,7 @@ function defaultCircle(){ // v0.1.8
 	setInterval(main_loop, 3000);
 }
 
-function userMute(){ // v0.1.3
+function userMute(){ // v0.1.4
 	var logging = false;
 
 	function log(txt) {
@@ -615,9 +615,9 @@ function userMute(){ // v0.1.3
 
 		var posts = $('#content .a-f-i-p').each(function(){ 
 			var th = $(this);
-			var user_link = th.find('.a-f-i-do');
-			var share_link = th.find('.a-f-i-u-go a');
-			var name = user_link.attr('title');
+			var user_link = th.find('.a-f-i-go a:first');
+			var share_link = th.find('.a-f-i-u-go a:first');
+			var name = user_link.text();
 			var share_id = typeof share_link.attr('oid') != 'undefined' ? share_link.attr('oid') : '';
 			var id = typeof user_link.attr('oid') != 'undefined' ? user_link.attr('oid') : '';
 
