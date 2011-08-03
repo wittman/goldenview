@@ -1,1 +1,1 @@
-/usr/local/git/bin/git archive HEAD --format=zip > ./local/zip/goldenview.zip
+/usr/local/git/bin/git archive HEAD --format=zip > goldenview.zip
