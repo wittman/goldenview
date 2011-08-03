@@ -2,3 +2,5 @@
 local/*
 *.psd
 *.tmproj
+.gitattributes export-ignore
+.gitignore export-ignore

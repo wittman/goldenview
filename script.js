@@ -2,7 +2,7 @@ var settings;
 
 var isJsPage = !!window.location.href.match(/_\/apps-static\//);
 
-function hideComments(hide_by_default){ // v0.2.1
+function hideComments(hide_by_default){ // v0.2.2
 	var logging = false;
 
 	function log(txt) {
@@ -72,7 +72,8 @@ function hideComments(hide_by_default){ // v0.2.1
 			'slow');
 	}
 	function editor_present(update){
-		return update.find('.a-f-i-Xb .tk3N6e-e-vj[role]').length > 0;
+		//return update.find('.a-f-i-Xb .tk3N6e-e-vj[role]').length > 0; OLD
+		return update.find('.l-e-O[role]').length > 0; //NEW
 	}
 	function remove_red_color_of_number(comment_count_display){
 		if(comment_count_display.length > 0){
@@ -84,14 +85,17 @@ function hideComments(hide_by_default){ // v0.2.1
 	function main_loop(){
 		var i = 0;
 		
-		$("[id^='update']").find(".a-f-i-Xb").each(function(){
+		//$("[id^='update']").find(".a-f-i-Xb").each(function(){ OLD
+		$("[id^='update'] > .Wh .Oq").each(function(){ //NEW
 			var t = $(this);
 			var update = t.parentsUntil("[id^='update']");
-			var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //a-f-i-bg
-			var comments = t;
+			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
+			var plust1_and_comments_link = update.find(".Xn"); //NEW
+			var comments = update.find('.em');
 
-			var old_comment_count_span = comments.find("div.a-f-i-WXPuNd span[role]");
-
+			//var old_comment_count_span = comments.find("div.a-f-i-WXPuNd span[role]"); //OLD
+			var old_comment_count_span = comments.find("div.Lt span[role]"); //NEW
+			
 			if( old_comment_count_span.hasClass('gpp__comments_hidden_old_shown') ){
 				old_comment_count_span.addClass('gpp__comments_hidden_old_shown');
 				remove_red_color_of_number(comment_count_display);
@@ -103,7 +107,9 @@ function hideComments(hide_by_default){ // v0.2.1
 				old_comment_count_display = '&nbsp;&nbsp;(OLD: <span class="gpp__hide_comments_old_number">' + old_comment_count + '</span>)';
 			}
 
-			var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r');
+			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
+			//<div class="Py vl"><div class="Lt Lq"><span role="button" class="d-k Yk" tabindex="0">4 more comments</span> <span class="jv">from <span class="mr">Evelyn Barney, Jorge Escobar, Martin Watson&nbsp;and&nbsp;Rae Ouzts</span></span></div><div class="Zn"></div></div>
+			var recent_comments = update.find('.Oy'); //NEW
 			var recent_comment_count = 0;
 			if(recent_comments.length > 0){
 				recent_comment_count = recent_comments.length;
@@ -122,7 +128,8 @@ function hideComments(hide_by_default){ // v0.2.1
 				
 				if( !comments.hasClass('gpp__comments') ){
 					comments.addClass('gpp__comments_' + i).addClass('gpp__comments');
-					button_html = '<br><span role="button" class="d-h a-b-f-i-gc-cf-Xb-h gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					//button_html = '<br><span role="button" class="d-h a-b-f-i-gc-cf-Xb-h gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>'; OLD
+					button_html = '<br><span role="button" class="d-k gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';//NEW
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
@@ -167,7 +174,7 @@ function hideComments(hide_by_default){ // v0.2.1
 				if(hiddenPostID != '' || hidden_by_default){
 					if( !editor_present(update) && !comments.hasClass('gpp__comments_shown') ){ //don't hide if comment editor in DOM
 						comments.hide();
-						show_hide.text('Show Comments');						
+						show_hide.text('Show Comments');
 					}
 				}
 				
@@ -1026,6 +1033,7 @@ function hideImages(hide_images_by_default){ // v0.1.2
 	function main_loop(){
 		
 		img_divs = $('#contentPane .a-b-f-S-oa div[data-content-url]');
+		//Wh us
 		img_count = img_divs.length;
 			
 		img_divs.each(function(){
