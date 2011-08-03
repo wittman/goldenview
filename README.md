@@ -59,6 +59,11 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.17
+
+- Default Circle - stars were appearing in stream view but not circle views. FIX
+- Hide Images - minor visual adjustment of camera icon background on hover. FIX
+
 ### Version 1.16
 
 - Changes made today by Google introduced breaking DOM tree changes. All modules needed updating and are now fixed. FIX

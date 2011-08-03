@@ -239,7 +239,7 @@ function hideComments(hide_by_default){ // v0.2.2
 	setInterval(main_loop, 2000);
 }
 
-function defaultCircle(){ // v0.1.9
+function defaultCircle(){ // v0.2.1
 	var logging = false;
 
 	function log(txt) {
@@ -417,7 +417,7 @@ function defaultCircle(){ // v0.1.9
 			}
 		}
 		
-		//var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first"); OLD
+		//var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first"); OLD 
 		var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //NEW
 
 		if( stream_active.length > 0 ){ 
@@ -442,36 +442,33 @@ function defaultCircle(){ // v0.1.9
 			}
 		}else{
 			//Circle is current view
-			if(default_circle_url != ''){
-				circle_links.each(function(){
-					var t = $(this);
-					var circle_link = t;
-					//Process Stream
-					if(stream.parent().find('.gpp__default_circle').length == 0){
-						stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_OUTLINE + '</a>');
-						var set_button = stream.parent().find('.gpp__default_circle:first');
-						set_button.click(function(){
-							GM_setValue('gpp__default_circle_url', '/stream');
-							window.location.href = '/stream';
-							return false;
-						})
-						.hover(
-							function(){
-								//$(this).empty().append('SET ★').css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
-								$(this).empty().append('SET ' + STAR_HOVER_SOLID).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
-							},
-							function(){
-								//$(this).empty().append('☆').css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
-								$(this).empty().append(STAR_OUTLINE).css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
-							}
-						);
-					}
-					//Process Circles
-					process_circles(t, default_circle_url, circle_link);
-				});
-			}
+			circle_links.each(function(){
+				var t = $(this);
+				var circle_link = t;
+				//Process Stream
+				if(stream.parent().find('.gpp__default_circle').length == 0){
+					stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_OUTLINE + '</a>');
+					var set_button = stream.parent().find('.gpp__default_circle:first');
+					set_button.click(function(){
+						GM_setValue('gpp__default_circle_url', '/stream');
+						window.location.href = '/stream';
+						return false;
+					})
+					.hover(
+						function(){
+							//$(this).empty().append('SET ★').css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
+							$(this).empty().append('SET ' + STAR_HOVER_SOLID).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
+						},
+						function(){
+							//$(this).empty().append('☆').css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
+							$(this).empty().append(STAR_OUTLINE).css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
+						}
+					);
+				}
+				//Process Circles
+				process_circles(t, default_circle_url, circle_link);
+			});
 		}
-		
 	}
 	var allow_stream = false;
 	var STAR_SOLID = img_star('star-solid.png');
@@ -696,7 +693,7 @@ function searchWithGoogle(){ // v0.1.2
 	});
 }
 
-function hideImages(hide_images_by_default){ // v0.1.3
+function hideImages(hide_images_by_default){ // v0.1.4
 	
 	/****** Utility functions ******/
 	function log(txt) {
@@ -1047,7 +1044,7 @@ function hideImages(hide_images_by_default){ // v0.1.3
 				//Process new images
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="height: 8px;width: 91%;" class="gpp__hide_images Lt Lq"><span role="button" class="Lt Lq" tabindex="0"><span style="margin-top:-5px" class="h-ta-p h-ta-p-y" title="Hidden image"></span><span style="font-size:9px;margin:0 0 0 4px;position:absolute"><a>SHOW / HIDE</a></span></span></div>');
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="height: 8px;width: 91%;" class="gpp__hide_images Lt Lq"><span role="button" tabindex="0"><span style="margin-top:-5px" class="h-ta-p h-ta-p-y" title="Hidden image"></span><span style="font-size:9px;margin:0 0 0 4px;position:absolute"><a>SHOW / HIDE</a></span></span></div>');
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.click(function(){
