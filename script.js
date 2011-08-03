@@ -483,7 +483,7 @@ function defaultCircle(){ // v0.2.1
 	setInterval(main_loop, 2000);
 }
 
-function userMute(){ // v0.1.6
+function userMute(){ // v0.1.8
 	var logging = false;
 
 	function log(txt) {
@@ -596,12 +596,12 @@ function userMute(){ // v0.1.6
 		return LANGUAGE[key][NORMALIZED_LANGUAGE_CODE];
 	}
 	function insert_unmute_button(th, id, share_id, name){
-		var unmute_html = '<div>' + name + ' <a style="font-size:10px" class="gpp_user_mute_unmute">' + t('unmute') + '</a></div>';
+		var unmute_html = '<div>' + name + ' <a style="font-size:10px" class="gpp__user_mute_unmute">' + t('unmute') + '</a></div>';
 		if( id_match(id, share_id) == 'share' ){
-			unmute_html = '<div>' + name + ' &nbsp;(<span style="font-size:10px" class="gpp_user_mute_unmute">' + t('muted_share') + ' &ndash; <a style="font-size:10px" href="https://plus.google.com/' + share_id + '">' + t('see_original') + '</a>' + '</span>)</div>'
+			unmute_html = '<div>' + name + ' &nbsp;(<span style="font-size:10px" class="gpp__user_mute_unmute">' + t('muted_share') + ' &ndash; <a style="font-size:10px" href="https://plus.google.com/' + share_id + '">' + t('see_original') + '</a>' + '</span>)</div>'
 		}
 		th.after(unmute_html);
-		th.parent().find('.gpp_user_mute_unmute:first').click(function(){
+		th.parent().find('.gpp__user_mute_unmute:first').click(function(){
 			if( !th.is(':visible') ){
 				th.fadeIn();
 			}
@@ -620,7 +620,7 @@ function userMute(){ // v0.1.6
 	function main_loop(){
 
 		//var posts = $('#content .a-f-i-p').each(function(){ //OLD
-		var posts = $("[id^='update'] > .Wh").each(function(){ //NEW
+		var posts = $("[id^='update'] .Wh").each(function(){ //NEW
 			var th = $(this);
 			var user_link = th.find('.Xy .rE a:first'); //NEW
 			var share_link = th.find('.Mt .vz a:first'); //NEW
@@ -631,45 +631,63 @@ function userMute(){ // v0.1.6
 			//GM_removeItem('gpp__user_mute_id_' + id); return;
 
 			//Set click handlers
-			if( th.find('.gpp_user_mute_mute:first').length == 0 ){
-				//th.find('.Xy .ao').children(':last').after(' &nbsp;<a style="font-size:10px" class="gpp_user_mute_mute">' + t('mute_user') + '</a>');
-				th.find('.Xy').append(' &nbsp;<a style="font-size:10px" class="gpp_user_mute_mute">' + t('mute_user') + '</a>');
-				th.parent().find('.gpp_user_mute_mute:first').click(function(){
+			if( th.find('.gpp__user_mute_mute:first').length == 0 && th.parent().find('.Xy .gpme-comment-count-container').length == 0 ){
+				//th.find('.Xy .ao').children(':last').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>');
+				//<div class="gpme-comment-count-container" style="display: none; "><span class="gpme-comment-count-bg gpme-comment-count-nohilite"></span><span class="gpme-comment-count-fg gpme-comment-count-nohilite"></span></div>)
+				
+				th.find('.Xy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>');
+				th.parent().find('.gpp__user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
 					GM_setValue('gpp__user_mute_id_' + id, '1');
 					//Muted, so insert unmute button
-					if( th.parent().find('.gpp_user_mute_unmute:first').length == 0 ){
+					if( th.parent().find('.gpp__user_mute_unmute:first').length == 0 ){
 						insert_unmute_button(th, id, share_id, name);
 					}
-					th.parent().find('.gpp_user_mute_unmute').parent().show();
+					th.parent().find('.gpp__user_mute_unmute').parent().show();
 				});
 			}
-
+			
 			//Check storage to find out if state == muted
 			if( id_match(id, share_id) ){
 				if( th.is(':visible') ){
 					th.hide();
 				}
 				if( !th.is(':visible') ){
-					th.parent().find('.gpp_user_mute_unmute:first').parent().show();
+					th.parent().find('.gpp__user_mute_unmute:first').parent().show();
 				}
-				if( th.parent().find('.gpp_user_mute_unmute:first').length == 0 ){
+				if( th.parent().find('.gpp__user_mute_unmute:first').length == 0 ){
 					insert_unmute_button(th, id, share_id, name);
 				}
 			}else{
 				if( !th.is(':visible') ){
 					th.show();
-					th.parent().find('.gpp_user_mute_unmute:first').parent().hide();
+					th.parent().find('.gpp__user_mute_unmute:first').parent().hide();
 				}
 			}
+	
+			// G+Me extension compatibility - Better handling of User Mute module - remove MUTE USER link when collapsed
+			if(G_PLUS_ME_EXTENSION_PRESENT){
+				var cloned_mute = $('#contentPane .gpme-titlebar .gpp__user_mute_mute');
+				if(cloned_mute.length){
+					cloned_mute.remove();
+				}
+			}
+				
 		});
+	
 	}
 
 	/****** Before main_loop ******/
 	/*** Constants ***/
 	var NORMALIZED_LANGUAGE_CODE = normalize_language(navigator.language);
 	var LANGUAGE = language_dictionary();
+	var G_PLUS_ME_EXTENSION_PRESENT = false;
+	
+	/*** 3rd-party extension compatibility - G+Me ***/
+	if( $('.gpme-titlebar:first').length ){
+		G_PLUS_ME_EXTENSION_PRESENT = true;
+	}
 
 	/****** Start main_loop ******/
 	setInterval(main_loop, 2000);
