@@ -483,7 +483,7 @@ function defaultCircle(){ // v0.2.1
 	setInterval(main_loop, 2000);
 }
 
-function userMute(){ // v0.1.5
+function userMute(){ // v0.1.6
 	var logging = false;
 
 	function log(txt) {
@@ -632,7 +632,8 @@ function userMute(){ // v0.1.5
 
 			//Set click handlers
 			if( th.find('.gpp_user_mute_mute:first').length == 0 ){
-				th.find('.Xy .ao').children(':last').after(' &nbsp;<a style="font-size:10px" class="gpp_user_mute_mute">' + t('mute_user') + '</a>');
+				//th.find('.Xy .ao').children(':last').after(' &nbsp;<a style="font-size:10px" class="gpp_user_mute_mute">' + t('mute_user') + '</a>');
+				th.find('.Xy').append(' &nbsp;<a style="font-size:10px" class="gpp_user_mute_mute">' + t('mute_user') + '</a>');
 				th.parent().find('.gpp_user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
@@ -674,7 +675,7 @@ function userMute(){ // v0.1.5
 	setInterval(main_loop, 2000);
 }
 
-function searchWithGoogle(){ // v0.1.2
+function searchWithGoogle(){ // v0.1.3
 	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="a-b-bl-G a-bl-G a-w-G va-G-va" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>';
 
 	var sbox = $('#search-box').after(search_box_new_html);

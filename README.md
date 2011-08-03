@@ -59,6 +59,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.18
+
+- User Mute - Missing MUTE USER link in the Stream view (mixed reports have come in). I haven't been able to replicate the issue (on latest stable Chromes on OS X and WinXP) but may be subtle difference in effective Javascript interpreter runtime behaviour. A key jQuery selector was changed to a simpler approach which may eliminate the bug. FIX
+
 ### Version 1.17
 
 - Default Circle - stars were appearing in stream view but not circle views. FIX
