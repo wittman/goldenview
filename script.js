@@ -239,7 +239,7 @@ function hideComments(hide_by_default){ // v0.2.2
 	setInterval(main_loop, 2000);
 }
 
-function defaultCircle(){ // v0.1.8
+function defaultCircle(){ // v0.1.9
 	var logging = false;
 
 	function log(txt) {
@@ -362,8 +362,9 @@ function defaultCircle(){ // v0.1.8
 		}
 	}
 	function main_loop(){
-		var circle_links_container = $("#content .a-b-la-A :first");
-		var circle_links = $("#content .a-b-la-A a[href*='stream/']");
+		//var circle_links_container = $("#content .a-b-la-A :first"); OLD
+		var circle_links_container = $("#content .a-b-sb-z:first"); //NEW
+		var circle_links = $("#content .a-b-sb-z a[href*='stream/']"); //NEW
 		var default_circle_url = GM_getValue('gpp__default_circle_url', '');
 		
 		circle_links_container.css('margin-left','8px');
@@ -372,7 +373,7 @@ function defaultCircle(){ // v0.1.8
 		//ON  <a href="/stream" target="_top" class="d-h a-b-h-Jb a-la-h a-la-aH  a-la-h-Pa">Stream</a>
 		
 		//Always add star to Stream 
-		var stream =  $("#content .a-b-la-A a[href='/stream']:first");
+		var stream =  $("#content .a-b-sb-z a[href='/stream']:first"); //NEW
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
 				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>');
@@ -416,8 +417,9 @@ function defaultCircle(){ // v0.1.8
 			}
 		}
 		
-		var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first");
-		
+		//var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first"); OLD
+		var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //NEW
+
 		if( stream_active.length > 0 ){ 
 			//Stream is current view
 			if( circle_links.find('.gpp__default_circle').length == 0 ){
@@ -481,7 +483,7 @@ function defaultCircle(){ // v0.1.8
 	add_css();
 	
 	/****** Start main_loop ******/
-	setInterval(main_loop, 3000);
+	setInterval(main_loop, 2000);
 }
 
 function userMute(){ // v0.1.4
