@@ -696,7 +696,7 @@ function searchWithGoogle(){ // v0.1.1
 	});
 }
 
-function hideImages(hide_images_by_default){ // v0.1.2
+function hideImages(hide_images_by_default){ // v0.1.3
 	
 	/****** Utility functions ******/
 	function log(txt) {
@@ -1030,13 +1030,13 @@ function hideImages(hide_images_by_default){ // v0.1.2
 
 	/****** Before Loop Variables ******/
 	var i = 0;
-	var img_divs = $('#contentPane .a-b-f-S-oa div[data-content-url]');
+	var img_divs = $('#contentPane .P-I-ba[data-content-url]'); //NEW
 	
 	/****** Loop ******/
 	function main_loop(){
 		
-		img_divs = $('#contentPane .a-b-f-S-oa div[data-content-url]');
-		//Wh us
+		img_divs = $('#contentPane .P-I-ba[data-content-url]'); //NEW
+
 		img_count = img_divs.length;
 			
 		img_divs.each(function(){
@@ -1047,7 +1047,7 @@ function hideImages(hide_images_by_default){ // v0.1.2
 				//Process new images
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="height: 8px;width: 91%;" class="gpp__hide_images a-f-i-WXPuNd a-b-f-i-W-xb"><span role="button" class="d-h a-b-f-i-gc-cf-Xb-h" tabindex="0"><span style="margin-top:-5px" class="n-Wa-q n-Wa-q-z" title="Hidden image"></span><span style="font-size:9px;margin:0 0 0 4px;position:absolute"><a>SHOW / HIDE</a></span></span></div>');
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="height: 8px;width: 91%;" class="gpp__hide_images Lt Lq"><span role="button" class="Lt Lq" tabindex="0"><span style="margin-top:-5px" class="h-ta-p h-ta-p-y" title="Hidden image"></span><span style="font-size:9px;margin:0 0 0 4px;position:absolute"><a>SHOW / HIDE</a></span></span></div>');
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.click(function(){
