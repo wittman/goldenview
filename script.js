@@ -2,7 +2,7 @@ var settings;
 
 var isJsPage = !!window.location.href.match(/_\/apps-static\//);
 
-function hideComments(hide_by_default){ // v0.2.2
+function hideComments(hide_by_default){ // v0.2.3
 	var logging = false;
 
 	function log(txt) {
@@ -73,7 +73,8 @@ function hideComments(hide_by_default){ // v0.2.2
 	}
 	function editor_present(update){
 		//return update.find('.a-f-i-Xb .tk3N6e-e-vj[role]').length > 0; OLD
-		return update.find('.l-e-O[role]').length > 0; //NEW
+		//return update.find('.l-e-O[role]').length > 0; //OLD
+		return update.find('.d-q-p[role]').length > 0; //NEW
 	}
 	function remove_red_color_of_number(comment_count_display){
 		if(comment_count_display.length > 0){
@@ -86,15 +87,19 @@ function hideComments(hide_by_default){ // v0.2.2
 		var i = 0;
 		
 		//$("[id^='update']").find(".a-f-i-Xb").each(function(){ OLD
-		$("[id^='update'] > .Wh .Oq").each(function(){ //NEW
+		//$("[id^='update'] > .Wh .Oq").each(function(){ //OLD
+		$("[id^='update'] .Gq").each(function(){ //NEW
 			var t = $(this);
 			var update = t.parentsUntil("[id^='update']");
 			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
-			var plust1_and_comments_link = update.find(".Xn"); //NEW
-			var comments = update.find('.em');
+			//var plust1_and_comments_link = update.find(".Xn"); //OLD
+			var plust1_and_comments_link = update.find(".Jn"); //NEW
+			//var comments = update.find('.em');
+			var comments = t; //.find('.Ly');
 
 			//var old_comment_count_span = comments.find("div.a-f-i-WXPuNd span[role]"); //OLD
-			var old_comment_count_span = comments.find("div.Lt span[role]"); //NEW
+			//var old_comment_count_span = comments.find("div.Lt span[role]"); //OLD
+			var old_comment_count_span = comments.find("div.Ft span[role]"); //NEW
 			
 			if( old_comment_count_span.hasClass('gpp__comments_hidden_old_shown') ){
 				old_comment_count_span.addClass('gpp__comments_hidden_old_shown');
@@ -109,7 +114,7 @@ function hideComments(hide_by_default){ // v0.2.2
 
 			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
 			//<div class="Py vl"><div class="Lt Lq"><span role="button" class="d-k Yk" tabindex="0">4 more comments</span> <span class="jv">from <span class="mr">Evelyn Barney, Jorge Escobar, Martin Watson&nbsp;and&nbsp;Rae Ouzts</span></span></div><div class="Zn"></div></div>
-			var recent_comments = update.find('.Oy'); //NEW
+			var recent_comments = update.find('.Gq .Ly'); //NEW
 			var recent_comment_count = 0;
 			if(recent_comments.length > 0){
 				recent_comment_count = recent_comments.length;
@@ -129,7 +134,7 @@ function hideComments(hide_by_default){ // v0.2.2
 				if( !comments.hasClass('gpp__comments') ){
 					comments.addClass('gpp__comments_' + i).addClass('gpp__comments');
 					//button_html = '<br><span role="button" class="d-h a-b-f-i-gc-cf-Xb-h gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>'; OLD
-					button_html = '<br><span role="button" class="d-k gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';//NEW
+					button_html = '<br><span role="button" class="d-k gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
@@ -239,7 +244,7 @@ function hideComments(hide_by_default){ // v0.2.2
 	setInterval(main_loop, 2000);
 }
 
-function defaultCircle(){ // v0.2.1
+function defaultCircle(){ // v0.2.2
 	var logging = false;
 
 	function log(txt) {
@@ -363,8 +368,10 @@ function defaultCircle(){ // v0.2.1
 	}
 	function main_loop(){
 		//var circle_links_container = $("#content .a-b-la-A :first"); OLD
-		var circle_links_container = $("#content .a-b-sb-z:first"); //NEW
-		var circle_links = $("#content .a-b-sb-z a[href*='stream/']"); //NEW
+		//var circle_links_container = $("#content .a-b-sb-z:first"); //OLD
+		var circle_links_container = $("#content .a-c-mb-S:first"); //NEW
+		//var circle_links = $("#content .a-b-sb-z a[href*='stream/']"); //OLD
+		var circle_links = $("#content .a-mb-k-da a[href*='stream/']"); //NEW
 		var default_circle_url = GM_getValue('gpp__default_circle_url', '');
 		
 		circle_links_container.css('margin-left','8px');
@@ -373,7 +380,7 @@ function defaultCircle(){ // v0.2.1
 		//ON  <a href="/stream" target="_top" class="d-h a-b-h-Jb a-la-h a-la-aH  a-la-h-Pa">Stream</a>
 		
 		//Always add star to Stream 
-		var stream =  $("#content .a-b-sb-z a[href='/stream']:first"); //NEW
+		var stream =  $("#content .a-c-mb-S a[href='/stream']:first"); //NEW
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
 				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>');
@@ -418,7 +425,8 @@ function defaultCircle(){ // v0.2.1
 		}
 		
 		//var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first"); OLD 
-		var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //NEW
+		//var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //OLD
+		var stream_active =  $("#content .a-c-mb-C a[href='/stream'].a-mb-k-ua:first"); //NEW
 
 		if( stream_active.length > 0 ){ 
 			//Stream is current view
@@ -483,7 +491,7 @@ function defaultCircle(){ // v0.2.1
 	setInterval(main_loop, 2000);
 }
 
-function userMute(){ // v0.1.8
+function userMute(){ // v0.1.9
 	var logging = false;
 
 	function log(txt) {
@@ -620,10 +628,13 @@ function userMute(){ // v0.1.8
 	function main_loop(){
 
 		//var posts = $('#content .a-f-i-p').each(function(){ //OLD
-		var posts = $("[id^='update'] .Wh").each(function(){ //NEW
+		//var posts = $("[id^='update'] .Wh").each(function(){ //OLD
+		var posts = $("[id^='update'] .zh").each(function(){ //NEW
 			var th = $(this);
-			var user_link = th.find('.Xy .rE a:first'); //NEW
-			var share_link = th.find('.Mt .vz a:first'); //NEW
+			//var user_link = th.find('.Xy .rE a:first'); //OLD
+			var user_link = th.find('.IE a:first'); //NEW
+			//var share_link = th.find('.Mt .vz a:first'); //OLD
+			var share_link = th.find('.Gt .sz a:first'); //NEW
 			var name = user_link.text();
 			var share_id = typeof share_link.attr('oid') != 'undefined' ? share_link.attr('oid') : '';
 			var id = typeof user_link.attr('oid') != 'undefined' ? user_link.attr('oid') : '';
@@ -635,7 +646,8 @@ function userMute(){ // v0.1.8
 				//th.find('.Xy .ao').children(':last').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>');
 				//<div class="gpme-comment-count-container" style="display: none; "><span class="gpme-comment-count-bg gpme-comment-count-nohilite"></span><span class="gpme-comment-count-fg gpme-comment-count-nohilite"></span></div>)
 				
-				th.find('.Xy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>');
+				//th.find('.Xy .ao').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
+				th.find('.Uy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
 				th.parent().find('.gpp__user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
@@ -693,8 +705,8 @@ function userMute(){ // v0.1.8
 	setInterval(main_loop, 2000);
 }
 
-function searchWithGoogle(){ // v0.1.3
-	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="a-b-bl-G a-bl-G a-w-G va-G-va" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>';
+function searchWithGoogle(){ // v0.1.4
+	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="a-c-Sn-E a-Sn-E a-w-E Na-E-Na" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>';
 
 	var sbox = $('#search-box').after(search_box_new_html);
 	var sbox_new = $('#ggp__search_with_google');
@@ -712,7 +724,7 @@ function searchWithGoogle(){ // v0.1.3
 	});
 }
 
-function hideImages(hide_images_by_default){ // v0.1.4
+function hideImages(hide_images_by_default){ // v0.1.5
 	
 	/****** Utility functions ******/
 	function log(txt) {
@@ -1046,12 +1058,13 @@ function hideImages(hide_images_by_default){ // v0.1.4
 
 	/****** Before Loop Variables ******/
 	var i = 0;
-	var img_divs = $('#contentPane .P-I-ba[data-content-url]'); //NEW
+	//var img_divs = $('#contentPane .P-I-ba[data-content-url]'); //OLD
+	var img_divs = $('#contentPane .O-F-X[data-content-url]'); //NEW
 	
 	/****** Loop ******/
 	function main_loop(){
 		
-		img_divs = $('#contentPane .P-I-ba[data-content-url]'); //NEW
+		img_divs = $('#contentPane .O-F-X[data-content-url]'); //NEW
 
 		img_count = img_divs.length;
 			
@@ -1063,7 +1076,7 @@ function hideImages(hide_images_by_default){ // v0.1.4
 				//Process new images
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="height: 8px;width: 91%;" class="gpp__hide_images Lt Lq"><span role="button" tabindex="0"><span style="margin-top:-5px" class="h-ta-p h-ta-p-y" title="Hidden image"></span><span style="font-size:9px;margin:0 0 0 4px;position:absolute"><a>SHOW / HIDE</a></span></span></div>');
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.click(function(){

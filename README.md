@@ -59,6 +59,9 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.20
+
+- Yet another set of DOM tree changes made by Google in the last 12 hours which require adjustments. All modules needed updating and are now fixed. FIX
 
 ### Version 1.19
 
