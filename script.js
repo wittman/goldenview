@@ -2,7 +2,7 @@ var settings;
 
 var isJsPage = !!window.location.href.match(/_\/apps-static\//);
 
-function hideComments(hide_by_default){ // v0.2.3
+function hideComments(hide_by_default){ // v0.2.4
 	var logging = false;
 
 	function log(txt) {
@@ -88,7 +88,8 @@ function hideComments(hide_by_default){ // v0.2.3
 		
 		//$("[id^='update']").find(".a-f-i-Xb").each(function(){ OLD
 		//$("[id^='update'] > .Wh .Oq").each(function(){ //OLD
-		$("[id^='update'] .Gq").each(function(){ //NEW
+		//$("[id^='update'] .Gq").each(function(){ //OLD
+			$("[id^='update'] .Ol").each(function(){ //NEW
 			var t = $(this);
 			var update = t.parentsUntil("[id^='update']");
 			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
@@ -113,7 +114,6 @@ function hideComments(hide_by_default){ // v0.2.3
 			}
 
 			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
-			//<div class="Py vl"><div class="Lt Lq"><span role="button" class="d-k Yk" tabindex="0">4 more comments</span> <span class="jv">from <span class="mr">Evelyn Barney, Jorge Escobar, Martin Watson&nbsp;and&nbsp;Rae Ouzts</span></span></div><div class="Zn"></div></div>
 			var recent_comments = update.find('.Gq .Ly'); //NEW
 			var recent_comment_count = 0;
 			if(recent_comments.length > 0){
@@ -132,13 +132,12 @@ function hideComments(hide_by_default){ // v0.2.3
 				
 				
 				if( !comments.hasClass('gpp__comments') ){
-					comments.addClass('gpp__comments_' + i).addClass('gpp__comments');
-					//button_html = '<br><span role="button" class="d-h a-b-f-i-gc-cf-Xb-h gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>'; OLD
-					button_html = '<br><span role="button" class="d-k gpp__comment_show_hide gpp__comment_show_hide_' + i + '" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					comments.addClass('gpp__comments');
+					button_html = '<br><span role="button" class="d-k gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
-					var show_hide = comments.parent().find('.gpp__comment_show_hide_' + i);
+					var show_hide = comments.parent().find('.gpp__comment_show_hide:first');
 					show_hide.click(function(e){
 						var t = $(this);
 						comments.addClass('gpp__comments_hidden_by_default');
@@ -491,7 +490,7 @@ function defaultCircle(){ // v0.2.2
 	setInterval(main_loop, 2000);
 }
 
-function userMute(){ // v0.1.9
+function userMute(){ // v0.2.0
 	var logging = false;
 
 	function log(txt) {
@@ -627,6 +626,9 @@ function userMute(){ // v0.1.9
 	}
 	function main_loop(){
 
+		if($("[id^='update']:first .IE:first a[oid]:first").length == 0) //Avoid implementing User Mute on Sparks view
+			return;
+			
 		//var posts = $('#content .a-f-i-p').each(function(){ //OLD
 		//var posts = $("[id^='update'] .Wh").each(function(){ //OLD
 		var posts = $("[id^='update'] .zh").each(function(){ //NEW
