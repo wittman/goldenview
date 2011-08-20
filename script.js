@@ -490,7 +490,7 @@ function defaultCircle(){ // v0.2.2
 	setInterval(main_loop, 2000);
 }
 
-function userMute(){ // v0.2.0
+function userMute(){ // v0.2.1
 	var logging = false;
 
 	function log(txt) {
@@ -626,17 +626,21 @@ function userMute(){ // v0.2.0
 	}
 	function main_loop(){
 
-		if($("[id^='update']:first .IE:first a[oid]:first").length == 0) //Avoid implementing User Mute on Sparks view
+		//if($("[id^='update']:first .IE:first a[oid]:first").length == 0) //Avoid implementing User Mute on Sparks view
+		if(window.location.href.indexOf('/sparks/') > -1) //Avoid implementing User Mute on Sparks view
 			return;
 			
 		//var posts = $('#content .a-f-i-p').each(function(){ //OLD
 		//var posts = $("[id^='update'] .Wh").each(function(){ //OLD
-		var posts = $("[id^='update'] .zh").each(function(){ //NEW
+		//var posts = $("[id^='update'] .zh").each(function(){ //OLD
+			var posts = $("[id^='update'] .tg").each(function(){ //NEW
 			var th = $(this);
 			//var user_link = th.find('.Xy .rE a:first'); //OLD
-			var user_link = th.find('.IE a:first'); //NEW
+			//var user_link = th.find('.IE a:first'); //OLD
+			var user_link = th.find('.CC a:first'); //NEW
 			//var share_link = th.find('.Mt .vz a:first'); //OLD
-			var share_link = th.find('.Gt .sz a:first'); //NEW
+			//var share_link = th.find('.Gt .sz a:first'); //OLD
+			var share_link = th.find('.Wx a:first'); //NEW .eo 
 			var name = user_link.text();
 			var share_id = typeof share_link.attr('oid') != 'undefined' ? share_link.attr('oid') : '';
 			var id = typeof user_link.attr('oid') != 'undefined' ? user_link.attr('oid') : '';
@@ -649,7 +653,8 @@ function userMute(){ // v0.2.0
 				//<div class="gpme-comment-count-container" style="display: none; "><span class="gpme-comment-count-bg gpme-comment-count-nohilite"></span><span class="gpme-comment-count-fg gpme-comment-count-nohilite"></span></div>)
 				
 				//th.find('.Xy .ao').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
-				th.find('.Uy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
+				//th.find('.Uy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
+				th.find('.Ex').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
 				th.parent().find('.gpp__user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
@@ -1052,7 +1057,7 @@ function hideImages(hide_images_by_default){ // v0.1.5
 
 	/****** Helper functions ******/
 	function isThumbnail(img){
-		return (img.height() == 46);
+		return (img.height() <= 62 || img.width() <= 62);
 	}
 
 	/****** Constants ******/
