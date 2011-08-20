@@ -59,6 +59,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.22
+
+- A new set of changes rolled-out by Google. All modules needed updating and are now fixed. FIX
+
 ### Version 1.21
 
 - Hide Comments - fixed problem where in some circumstance comment hiding wasn't functioning correctly. FIX

@@ -2,7 +2,7 @@ var settings;
 
 var isJsPage = !!window.location.href.match(/_\/apps-static\//);
 
-function hideComments(hide_by_default){ // v0.2.4
+function hideComments(hide_by_default){ // v0.2.5
 	var logging = false;
 
 	function log(txt) {
@@ -89,12 +89,14 @@ function hideComments(hide_by_default){ // v0.2.4
 		//$("[id^='update']").find(".a-f-i-Xb").each(function(){ OLD
 		//$("[id^='update'] > .Wh .Oq").each(function(){ //OLD
 		//$("[id^='update'] .Gq").each(function(){ //OLD
-			$("[id^='update'] .Ol").each(function(){ //NEW
+			//$("[id^='update'] .Ol").each(function(){ //OLD
+			$("[id^='update'] .Vg").each(function(){ //NEW
 			var t = $(this);
 			var update = t.parentsUntil("[id^='update']");
 			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
 			//var plust1_and_comments_link = update.find(".Xn"); //OLD
-			var plust1_and_comments_link = update.find(".Jn"); //NEW
+			//var plust1_and_comments_link = update.find(".Jn"); //OLD
+			var plust1_and_comments_link = update.find(".Ol"); //NEW
 			//var comments = update.find('.em');
 			var comments = t; //.find('.Ly');
 
@@ -114,7 +116,8 @@ function hideComments(hide_by_default){ // v0.2.4
 			}
 
 			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
-			var recent_comments = update.find('.Gq .Ly'); //NEW
+			//var recent_comments = update.find('.Gq .Ly'); //OLD
+			var recent_comments = update.find('.sx'); //NEW
 			var recent_comment_count = 0;
 			if(recent_comments.length > 0){
 				recent_comment_count = recent_comments.length;
@@ -133,7 +136,7 @@ function hideComments(hide_by_default){ // v0.2.4
 				
 				if( !comments.hasClass('gpp__comments') ){
 					comments.addClass('gpp__comments');
-					button_html = '<br><span role="button" class="d-k gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					button_html = '<br><span role="button" class="c-j gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
