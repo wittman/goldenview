@@ -731,7 +731,7 @@ function searchWithGoogle(){ // v0.1.4
 	});
 }
 
-function hideImages(hide_images_by_default){ // v0.1.5
+function hideImages(hide_images_by_default){ // v0.1.6
 	
 	/****** Utility functions ******/
 	function log(txt) {
@@ -1066,12 +1066,14 @@ function hideImages(hide_images_by_default){ // v0.1.5
 	/****** Before Loop Variables ******/
 	var i = 0;
 	//var img_divs = $('#contentPane .P-I-ba[data-content-url]'); //OLD
-	var img_divs = $('#contentPane .O-F-X[data-content-url]'); //NEW
+	//var img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
+	var img_divs = $('#contentPane .H-y-qa[data-content-url]'); //NEW
 	
 	/****** Loop ******/
 	function main_loop(){
 		
-		img_divs = $('#contentPane .O-F-X[data-content-url]'); //NEW
+		//img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
+		img_divs = $('#contentPane .H-y-qa[data-content-url]'); //NEW
 
 		img_count = img_divs.length;
 			
@@ -1083,7 +1085,8 @@ function hideImages(hide_images_by_default){ // v0.1.5
 				//Process new images
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
+				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;backgrounnd-position-y:-201px;" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.click(function(){
