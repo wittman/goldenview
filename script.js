@@ -243,7 +243,7 @@ function hideComments(hide_by_default){ // v0.2.4
 	setInterval(main_loop, 2000);
 }
 
-function defaultCircle(){ // v0.2.2
+function defaultCircle(){ // v0.2.3
 	var logging = false;
 
 	function log(txt) {
@@ -368,9 +368,13 @@ function defaultCircle(){ // v0.2.2
 	function main_loop(){
 		//var circle_links_container = $("#content .a-b-la-A :first"); OLD
 		//var circle_links_container = $("#content .a-b-sb-z:first"); //OLD
-		var circle_links_container = $("#content .a-c-mb-S:first"); //NEW
+		//var circle_links_container = $("#content .a-c-mb-S:first"); //OLD
+		var circle_links_container = $("#content .a-e-nb-B:first"); //NEW
+		
 		//var circle_links = $("#content .a-b-sb-z a[href*='stream/']"); //OLD
-		var circle_links = $("#content .a-mb-k-da a[href*='stream/']"); //NEW
+		//var circle_links = $("#content .a-mb-k-da a[href*='stream/']"); //OLD
+		var circle_links = $("#content .a-nb-j-T a[href*='stream/']"); //NEW
+		
 		var default_circle_url = GM_getValue('gpp__default_circle_url', '');
 		
 		circle_links_container.css('margin-left','8px');
@@ -379,7 +383,8 @@ function defaultCircle(){ // v0.2.2
 		//ON  <a href="/stream" target="_top" class="d-h a-b-h-Jb a-la-h a-la-aH  a-la-h-Pa">Stream</a>
 		
 		//Always add star to Stream 
-		var stream =  $("#content .a-c-mb-S a[href='/stream']:first"); //NEW
+		//var stream =  $("#content .a-c-mb-S a[href='/stream']:first"); //OLD
+		var stream =  $("#content .a-e-nb-B a[href='/stream']:first"); //NEW
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
 				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>');
@@ -425,7 +430,9 @@ function defaultCircle(){ // v0.2.2
 		
 		//var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first"); OLD 
 		//var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //OLD
-		var stream_active =  $("#content .a-c-mb-C a[href='/stream'].a-mb-k-ua:first"); //NEW
+		//var stream_active =  $("#content .a-c-mb-C a[href='/stream'].a-mb-k-ua:first"); //OLD
+		var stream_active =  $("#content .a-e-nb-B a[href='/stream'].a-nb-j-ma:first"); //NEW
+		
 
 		if( stream_active.length > 0 ){ 
 			//Stream is current view
