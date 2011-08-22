@@ -59,6 +59,11 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.23
+
+- Hide Comments - Fixed display of OLD COMMENTS, comment editor active detection, and scroll-to-plus-1 upon hide comments click. FIX
+- Hide Images - Fixed position of SHOW/HIDE button so it floats below the image instead of next to it as it did in some cases. FIX
+
 ### Version 1.22
 
 - A new set of changes rolled-out by Google. All modules needed updating and are now fixed. FIX
