@@ -74,7 +74,7 @@ function hideComments(hide_by_default){ // v0.2.5
 	function editor_present(update){
 		//return update.find('.a-f-i-Xb .tk3N6e-e-vj[role]').length > 0; OLD
 		//return update.find('.l-e-O[role]').length > 0; //OLD
-		return update.find('.d-q-p[role]').length > 0; //NEW
+		return update.find('.c-m-l[role]').length > 0; //NEW
 	}
 	function remove_red_color_of_number(comment_count_display){
 		if(comment_count_display.length > 0){
@@ -96,13 +96,14 @@ function hideComments(hide_by_default){ // v0.2.5
 			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
 			//var plust1_and_comments_link = update.find(".Xn"); //OLD
 			//var plust1_and_comments_link = update.find(".Jn"); //OLD
-			var plust1_and_comments_link = update.find(".Ol"); //NEW
+			var plust1_and_comments_link = update.find(".ol"); //NEW
 			//var comments = update.find('.em');
 			var comments = t; //.find('.Ly');
 
 			//var old_comment_count_span = comments.find("div.a-f-i-WXPuNd span[role]"); //OLD
 			//var old_comment_count_span = comments.find("div.Lt span[role]"); //OLD
-			var old_comment_count_span = comments.find("div.Ft span[role]"); //NEW
+			//var old_comment_count_span = comments.find("div.Ft span[role]"); //OLD
+			var old_comment_count_span = comments.find(".xx[role]"); //NEW
 			
 			if( old_comment_count_span.hasClass('gpp__comments_hidden_old_shown') ){
 				old_comment_count_span.addClass('gpp__comments_hidden_old_shown');
@@ -112,7 +113,9 @@ function hideComments(hide_by_default){ // v0.2.5
 			var old_comment_count_display = '';
 			if(old_comment_count_span.length > 0){
 				old_comment_count = old_comment_count_span.text().match(/\d+/);
-				old_comment_count_display = '&nbsp;&nbsp;(OLD: <span class="gpp__hide_comments_old_number">' + old_comment_count + '</span>)';
+				if(old_comment_count > 0){
+					old_comment_count_display = '&nbsp;&nbsp;(OLD: <span class="gpp__hide_comments_old_number">' + old_comment_count + '</span>)';
+				}
 			}
 
 			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
@@ -1096,7 +1099,7 @@ function hideImages(hide_images_by_default){ // v0.1.6
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.click(function(){
