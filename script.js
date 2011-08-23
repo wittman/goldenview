@@ -2,8 +2,8 @@ var settings;
 
 var isJsPage = !!window.location.href.match(/_\/apps-static\//);
 
-function hideComments(hide_by_default){ // v0.2.5
-	var logging = false;
+function hideComments(hide_by_default){ // v0.2.7
+    var logging = false;
 
 	function log(txt) {
 	  if(logging) {
@@ -74,7 +74,8 @@ function hideComments(hide_by_default){ // v0.2.5
 	function editor_present(update){
 		//return update.find('.a-f-i-Xb .tk3N6e-e-vj[role]').length > 0; OLD
 		//return update.find('.l-e-O[role]').length > 0; //OLD
-		return update.find('.c-m-l[role]').length > 0; //NEW
+		//return update.find('.c-m-l[role]').length > 0; //OLD
+        return update.find('.b-n-l[role]').length > 0; //NEW
 	}
 	function remove_red_color_of_number(comment_count_display){
 		if(comment_count_display.length > 0){
@@ -89,21 +90,24 @@ function hideComments(hide_by_default){ // v0.2.5
 		//$("[id^='update']").find(".a-f-i-Xb").each(function(){ OLD
 		//$("[id^='update'] > .Wh .Oq").each(function(){ //OLD
 		//$("[id^='update'] .Gq").each(function(){ //OLD
-			//$("[id^='update'] .Ol").each(function(){ //OLD
-			$("[id^='update'] .Vg").each(function(){ //NEW
+		//$("[id^='update'] .Ol").each(function(){ //OLD
+		//$("[id^='update'] .Vg").each(function(){ //OLD
+		$("[id^='update'] .Ag").each(function(){ //NEW
 			var t = $(this);
 			var update = t.parentsUntil("[id^='update']");
 			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
 			//var plust1_and_comments_link = update.find(".Xn"); //OLD
 			//var plust1_and_comments_link = update.find(".Jn"); //OLD
-			var plust1_and_comments_link = update.find(".ol"); //NEW
+			//var plust1_and_comments_link = update.find(".ol"); //OLD
+            var plust1_and_comments_link = update.find(".Bl"); //NEW
 			//var comments = update.find('.em');
 			var comments = t; //.find('.Ly');
 
 			//var old_comment_count_span = comments.find("div.a-f-i-WXPuNd span[role]"); //OLD
 			//var old_comment_count_span = comments.find("div.Lt span[role]"); //OLD
 			//var old_comment_count_span = comments.find("div.Ft span[role]"); //OLD
-			var old_comment_count_span = comments.find(".xx[role]"); //NEW
+			//var old_comment_count_span = comments.find(".xx[role]"); //OLD
+            var old_comment_count_span = comments.find(".Kr[role]"); //NEW
 			
 			if( old_comment_count_span.hasClass('gpp__comments_hidden_old_shown') ){
 				old_comment_count_span.addClass('gpp__comments_hidden_old_shown');
@@ -120,7 +124,8 @@ function hideComments(hide_by_default){ // v0.2.5
 
 			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
 			//var recent_comments = update.find('.Gq .Ly'); //OLD
-			var recent_comments = update.find('.sx'); //NEW
+			//var recent_comments = update.find('.sx'); //OLD
+            var recent_comments = update.find('.mf'); //NEW
 			var recent_comment_count = 0;
 			if(recent_comments.length > 0){
 				recent_comment_count = recent_comments.length;
@@ -139,7 +144,7 @@ function hideComments(hide_by_default){ // v0.2.5
 				
 				if( !comments.hasClass('gpp__comments') ){
 					comments.addClass('gpp__comments');
-					button_html = '<br><span role="button" class="c-j gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					button_html = '<br><span role="button" class="b-j gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
@@ -249,7 +254,7 @@ function hideComments(hide_by_default){ // v0.2.5
 	setInterval(main_loop, 2000);
 }
 
-function defaultCircle(){ // v0.2.3
+function defaultCircle(){ // v0.2.5
 	var logging = false;
 
 	function log(txt) {
@@ -375,11 +380,13 @@ function defaultCircle(){ // v0.2.3
 		//var circle_links_container = $("#content .a-b-la-A :first"); OLD
 		//var circle_links_container = $("#content .a-b-sb-z:first"); //OLD
 		//var circle_links_container = $("#content .a-c-mb-S:first"); //OLD
-		var circle_links_container = $("#content .a-e-nb-B:first"); //NEW
-		
+		//var circle_links_container = $("#content .a-e-nb-B:first"); //OLD
+        var circle_links_container = $("#content .a-f-ob-B:first"); //NEW
+
 		//var circle_links = $("#content .a-b-sb-z a[href*='stream/']"); //OLD
 		//var circle_links = $("#content .a-mb-k-da a[href*='stream/']"); //OLD
-		var circle_links = $("#content .a-nb-j-T a[href*='stream/']"); //NEW
+		//var circle_links = $("#content .a-nb-j-T a[href*='stream/']"); //OLD
+        var circle_links = $("#content .a-ob-j-X a[href*='stream/']"); //NEW
 		
 		var default_circle_url = GM_getValue('gpp__default_circle_url', '');
 		
@@ -390,7 +397,8 @@ function defaultCircle(){ // v0.2.3
 		
 		//Always add star to Stream 
 		//var stream =  $("#content .a-c-mb-S a[href='/stream']:first"); //OLD
-		var stream =  $("#content .a-e-nb-B a[href='/stream']:first"); //NEW
+		//var stream =  $("#content .a-e-nb-B a[href='/stream']:first"); //OLD
+        var stream =  $("#content .a-f-ob-B a[href='/stream']:first"); //NEW
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
 				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>');
@@ -437,7 +445,8 @@ function defaultCircle(){ // v0.2.3
 		//var stream_active =  $("#content .a-b-la-A a[href='/stream'].a-la-h-Pa:first"); OLD 
 		//var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //OLD
 		//var stream_active =  $("#content .a-c-mb-C a[href='/stream'].a-mb-k-ua:first"); //OLD
-		var stream_active =  $("#content .a-e-nb-B a[href='/stream'].a-nb-j-ma:first"); //NEW
+		//var stream_active =  $("#content .a-e-nb-B a[href='/stream'].a-nb-j-ma:first"); //OLD
+        var stream_active =  $("#content .a-f-ob-B a[href='/stream'].a-ob-j-ia:first"); //NEW
 		
 
 		if( stream_active.length > 0 ){ 
@@ -476,11 +485,11 @@ function defaultCircle(){ // v0.2.3
 					})
 					.hover(
 						function(){
-							//$(this).empty().append('SET ★').css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
+							//$(this).empty().append('SET Ã¢Ëœâ€¦').css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
 							$(this).empty().append('SET ' + STAR_HOVER_SOLID).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
 						},
 						function(){
-							//$(this).empty().append('☆').css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
+							//$(this).empty().append('Ã¢Ëœâ€ ').css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
 							$(this).empty().append(STAR_OUTLINE).css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
 						}
 					);
@@ -503,7 +512,7 @@ function defaultCircle(){ // v0.2.3
 	setInterval(main_loop, 2000);
 }
 
-function userMute(){ // v0.2.1
+function userMute(){ // v0.2.3
 	var logging = false;
 
 	function log(txt) {
@@ -601,12 +610,12 @@ function userMute(){ // v0.2.1
 			},
 			'see_original' : {
 				'en-US' : 'SEE ORIGINAL POSTER TO UNMUTE',
-				'sv-SE' : 'VISA ORIGINALSKRIBENTEN FÖR DET DOLDA MEDDELANDET',
+				'sv-SE' : 'VISA ORIGINALSKRIBENTEN FÃƒâ€“R DET DOLDA MEDDELANDET',
 				'xx-XX' : '_____'
 			},
 			'mute_user' : {
 				'en-US' : 'MUTE USER',
-				'sv-SE' : 'DÖLJ ANVÄNDAREN',
+				'sv-SE' : 'DÃƒâ€“LJ ANVÃƒâ€žNDAREN',
 				'xx-XX' : '_____'
 			}
 		}
@@ -646,14 +655,17 @@ function userMute(){ // v0.2.1
 		//var posts = $('#content .a-f-i-p').each(function(){ //OLD
 		//var posts = $("[id^='update'] .Wh").each(function(){ //OLD
 		//var posts = $("[id^='update'] .zh").each(function(){ //OLD
-			var posts = $("[id^='update'] .tg").each(function(){ //NEW
+        //var posts = $("[id^='update'] .tg").each(function(){ //OLD
+        var posts = $("[id^='update'] .Tf").each(function(){ //NEW
 			var th = $(this);
 			//var user_link = th.find('.Xy .rE a:first'); //OLD
 			//var user_link = th.find('.IE a:first'); //OLD
-			var user_link = th.find('.CC a:first'); //NEW
+			//var user_link = th.find('.CC a:first'); //OLD
+            var user_link = th.find('.nC a:first'); //NEW
 			//var share_link = th.find('.Mt .vz a:first'); //OLD
 			//var share_link = th.find('.Gt .sz a:first'); //OLD
-			var share_link = th.find('.Wx a:first'); //NEW .eo 
+			//var share_link = th.find('.Wx a:first'); //OLD 
+            var share_link = th.find('.gx a:first'); //NEW
 			var name = user_link.text();
 			var share_id = typeof share_link.attr('oid') != 'undefined' ? share_link.attr('oid') : '';
 			var id = typeof user_link.attr('oid') != 'undefined' ? user_link.attr('oid') : '';
@@ -661,13 +673,14 @@ function userMute(){ // v0.2.1
 			//GM_removeItem('gpp__user_mute_id_' + id); return;
 
 			//Set click handlers
-			if( th.find('.gpp__user_mute_mute:first').length == 0 && th.parent().find('.Xy .gpme-comment-count-container').length == 0 ){
+			if( th.find('.gpp__user_mute_mute:first').length == 0 && th.parent().find('.gpme-comment-count-container').length == 0 ){
 				//th.find('.Xy .ao').children(':last').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>');
 				//<div class="gpme-comment-count-container" style="display: none; "><span class="gpme-comment-count-bg gpme-comment-count-nohilite"></span><span class="gpme-comment-count-fg gpme-comment-count-nohilite"></span></div>)
 				
 				//th.find('.Xy .ao').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
 				//th.find('.Uy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
-				th.find('.Ex').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
+				//th.find('.Ex').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
+                th.find('.Nw').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
 				th.parent().find('.gpp__user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
@@ -725,8 +738,8 @@ function userMute(){ // v0.2.1
 	setInterval(main_loop, 2000);
 }
 
-function searchWithGoogle(){ // v0.1.5
-	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="a-e-Eu-z a-Eu-z a-x-z Na-z-Na" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>'; //NEW
+function searchWithGoogle(){ // v0.1.7
+	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="a-f-pu-z a-pu-z a-x-z Ka-z-Ka" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>'; //NEW
 
 	var sbox = $('#search-box').after(search_box_new_html);
 	var sbox_new = $('#ggp__search_with_google');
@@ -744,7 +757,7 @@ function searchWithGoogle(){ // v0.1.5
 	});
 }
 
-function hideImages(hide_images_by_default){ // v0.1.6
+function hideImages(hide_images_by_default){ // v0.1.8
 	
 	/****** Utility functions ******/
 	function log(txt) {
@@ -1080,13 +1093,15 @@ function hideImages(hide_images_by_default){ // v0.1.6
 	var i = 0;
 	//var img_divs = $('#contentPane .P-I-ba[data-content-url]'); //OLD
 	//var img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
-	var img_divs = $('#contentPane .H-y-qa[data-content-url]'); //NEW
+	//var img_divs = $('#contentPane .H-y-qa[data-content-url]'); //OLD
+    var img_divs = $('#contentPane .F-y-Ia[data-content-url]'); //NEW
 	
 	/****** Loop ******/
 	function main_loop(){
 		
 		//img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
-		img_divs = $('#contentPane .H-y-qa[data-content-url]'); //NEW
+		//img_divs = $('#contentPane .H-y-qa[data-content-url]'); //OLD
+        img_divs = $('#contentPane .F-y-Ia[data-content-url]'); //NEW
 
 		img_count = img_divs.length;
 			
@@ -1099,9 +1114,16 @@ function hideImages(hide_images_by_default){ // v0.1.6
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
+				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images Lr9 Hw i-wa-m-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
+				button.hover(function(){
+					$(this).css('background-color', 'whiteSmoke');
+				},
+				function(){
+					$(this).css('background-color', 'inherit');
+				});
 				button.click(function(){
 					if( img.is(':visible') ){
 						//Hide
@@ -1144,12 +1166,12 @@ function hideImages(hide_images_by_default){ // v0.1.6
 function onLoad() {
 	//console.log("Loaded Google+: " + window.location.href);
 	if (!settings) {
-	﻿  chrome.extension.sendRequest({'name' : 'settings'}, function(theSettings) {
+		  chrome.extension.sendRequest({'name' : 'settings'}, function(theSettings) {
 		//console.log(settings);
 			if (!settings) {
-			 ﻿  settings = theSettings;
+			 	  settings = theSettings;
 				//console.log(settings);
-			 ﻿  if (settings.user_mute)
+			 	  if (settings.user_mute)
 					userMute();
 				if (settings.default_circle)
 					defaultCircle();
@@ -1175,7 +1197,7 @@ function onLoad() {
 				if (settings.search_with_google)
 					searchWithGoogle();
 			}
-	﻿  });
+		  });
 	}
 }
 

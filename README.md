@@ -59,6 +59,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.24
+
+- Yes, another set of changes rolled-out by Google. All modules needed updating and are now fixed. FIX
+
 ### Version 1.23
 
 - Hide Comments - Fixed display of OLD COMMENTS, comment editor active detection, and scroll-to-plus-1 upon hide comments click. FIX
