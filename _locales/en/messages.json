@@ -3,6 +3,7 @@
 
 	"options": { "message": "Options" },
 	"options_features": { "message": "Features" },
+	"options_resource_update": { "message": "Resource Cache/Updating" },
 	"options_bugs": { "message": "Bugs" },
 	"options_author": { "message": "Author" },
 
@@ -17,6 +18,9 @@
 	"options_hide_images_default_hide": { "message": "Enable - Hide by Default" },
 	"options_hide_images_disable": { "message": "Disable" },
 
+	"options_force_selector_map_update": { "message": "Force Selector Map Update (selector map updates automatically on an interval, but this forces an immediate update)" },
+	"options_force_selector_map_update_clicked_alert": { "message": "Force Selector Map Update Initiated." },
+	"options_force_selector_map_update_button": { "message": "Force Map Update" },
 	"options_report_bug": { "message": "Caught a bug? Report it on github" },
 	"options_report_bug_button": { "message": "Report Bug" },
 	"options_extension_page": { "message": "Visit the extension page to leave a snazzy review" },

@@ -9,11 +9,27 @@ var settings = new Store("settings", {
 	"search_with_google": true
 	
 });
+var force_selector_map_update_once_init = false;
+var force_selector_map_update_once = false;
 </script>
 <script>
 function onRequest(request, sender, callback) {
 	if (request.name == 'settings')
 		callback(settings.toObject());
+		
+	if (request.name == 'force_selector_map_update_once_init'){
+		force_selector_map_update_once_init = true;
+	}
+	
+	if (request.name == 'force_selector_map_update_once'){
+		if( force_selector_map_update_once_init && !force_selector_map_update_once ){
+			force_selector_map_update_once = true;
+			callback(false);
+		}else{
+			callback(true);
+		}
+	}
+
 };
 
 // Wire up the listener.

@@ -2,8 +2,8 @@
 	"background_page": "background.html",
 	"content_scripts": [ {
 		"all_frames": true,
-		"js": [ "jquery.js", "script.js" ],
-		"matches": [ "http://plus.google.com/*", "https://plus.google.com/*" ],
+		"js": [ "jquery.js", "util.js", "default_selector_map.js", "script.js" ],
+		"matches": [ "http://plus.google.com/*", "https://plus.google.com/*", "http://goldenview.wittman.org/*", "https://goldenview.wittman.org/*" ],
 		"run_at": "document_start"
 	} ],
 	"description": "Google+ (Google Plus) enhancements: (optional) modules: User Mute, Default Circle, Hide Images, Hide comments, & Search w/ Google.",
@@ -17,5 +17,5 @@
 	"name": "Golden View for Google+",
 	"update_url": "http://clients2.google.com/service/update2/crx",
 	"default_locale": "en",
-	"version": "1.24"
+	"version": "1.25"
 }

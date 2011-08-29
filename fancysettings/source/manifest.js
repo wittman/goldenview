@@ -50,6 +50,14 @@ this.manifest = {
 	},
 	{
 	  "tab": chrome.i18n.getMessage("options"),
+	  "group": chrome.i18n.getMessage("options_resource_update"),
+	  "name": "force_selector_map_update",
+	  "type": "button",
+	  "label": chrome.i18n.getMessage("options_force_selector_map_update"),
+	  "text": chrome.i18n.getMessage("options_force_selector_map_update_button")
+	},
+	{
+	  "tab": chrome.i18n.getMessage("options"),
 	  "group": chrome.i18n.getMessage("options_bugs"),
 	  "name": "report_bug",
 	  "type": "button",

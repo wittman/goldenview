@@ -1,5 +1,12 @@
 window.addEvent("domready", function () {
     new FancySettings.initWithManifest(function (settings) {
+	    settings.manifest.force_selector_map_update.addEvent("action", function () {
+			//if(settings.force_selector_map_update_once == false){
+           	chrome.extension.sendRequest({ name: "force_selector_map_update_once_init", message: true });
+			alert(chrome.i18n.getMessage("options_force_selector_map_update_clicked_alert"));
+			//settings.force_selector_map_update_once = true;
+			
+        });
         settings.manifest.report_bug.addEvent("action", function () {
             window.open("https://github.com/wittman/goldenview/issues/new");
         });

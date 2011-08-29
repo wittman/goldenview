@@ -2,6 +2,132 @@ var settings;
 
 var isJsPage = !!window.location.href.match(/_\/apps-static\//);
 
+function re_map(mappings){
+	var m = mappings;
+	SEL = {
+		'post' : "[id^='update-']", //"[id^='update-']"
+		'posts' : m['XVDd7kiawTA9Z68I'], //".tn"
+		'comments_wrap' : m['nqBp6N6dKqueig2R'], //".Ij"
+		'comment_editor_cancel' : m['KGafpX8THW0zZ9Jq'], //'.b-n-l'
+		'plust1_and_comments_link_wrap' : m['YAnwDHrlMoy67el9'], //".Bl"
+		'old_comment_count_span' : m['9Iug6cv5o3NgTEEv'], //".Gw"
+		'recent_comments_wrap' : m['CgYb1dbCZGVfpUAj'], //'.mf'
+		'circle_links_wrap' : '#content ' + m['tZ7bxNTZEoVrcPyj'] + ' + div', //"#content .a-ud-B + div"		
+		'circle_links' : "#content " + m['NCQTv2BvLd3MFT9q'].replace(':hover','') + " a[href*='stream/']", //"#content .a-ob-j-X a[href*='stream/']"
+		'stream_link' : "#content " + m['XLINtDfuUFUIgeVl'] + " + a[href='/stream']:first", //"#content .a-ob-Fd a[href='/stream']:first"
+		'stream_link_active' : "#content " + m['XLINtDfuUFUIgeVl'] + " + a[href='/stream']" + m['oL8HuLz0SCCVwtPK'] + ":first", //"#content .a-f-ob-B a[href='/stream'].a-ob-j-ia:first"
+		'user_link' : m['tuVm7xq63YKbjl9u'] + ' a:first', //'.Nw a:first'
+		'share_link' : m['xG7OYDQoYoP4QS0R'] + ' a:first', //'.gx a:first'
+		'permalink_wrap' : m['tuVm7xq63YKbjl9u'], //'.Nw'
+		'search_input_classes' : m['ikY6QG1yVApfM0ib'].replace('.','') + ' ' + m['9WbMI68ODRm5sxgV'].replace('.','') + ' ' + m['QvnLjkPdyzwsVmEq'].replace('.',''), //'a-pu-z a-x-z Ka-z-Ka'
+		'___' : ''
+	};
+}
+
+function set_selector_mappings(){
+	var mappings = {};
+	try{
+		//console.log(SEL);
+		/*stor_del('GPlus CSS Map');
+		stor_del('Last Got GPlus CSS Map Date');
+		stor_del('GPlus CSS Map Date');
+		return;*/
+		
+		//var now = new Date("August 25, 2011 22:27:00"); //new Date();
+		var now = new Date();
+
+		var stored_mappings;
+		var stored_last_check_for_map_update;
+		var stored_map_date;
+
+		//Check for resume flag
+		var uncheckable_dom_litmus_location = false;
+		var path = window.location.pathname;
+		if( path !=  '/' && path.indexOf('/stream/') == -1 && path.indexOf('/posts') == -1 ){
+			uncheckable_dom_litmus_location = true;
+		}
+		
+		//Set mappings if first time upon page load
+		if( !SET_SELECTOR_MAPPINGS_DONE_ONCE ){
+			stored_mappings = $.parseJSON(stor_get('GPlus CSS Map', null));
+			stored_last_check_for_map_update = stor_get('Last Got GPlus CSS Map Date', 0);
+			stored_map_date = stor_get('GPlus CSS Map Date', '');
+
+			//User stored mapping if newer than default mappings
+			if((stored_last_check_for_map_update != 0) && (stored_mappings) && (stored_map_date > default_selector_map['mapping date right'])){
+				mappings = stored_mappings; //local storage copy of map
+			}else{
+				mappings = default_selector_map.mappings; //included default map file
+			}
+
+			//console.log('mappings_before_remap:');
+			//console.log(default_selector_map.mappings);
+			re_map(mappings);
+			//console.log(SEL);
+		}else{
+			SET_SELECTOR_MAPPINGS_DONE_ONCE = true; //done once, set flag
+		}
+		
+		//Check if resume mode is needed
+		if(uncheckable_dom_litmus_location){
+			RESUME_MAP_CHECK_UPON_ROOT_PATH = true; //flag to re-run when at root URL
+			return;
+		}
+		
+		RESUME_MAP_CHECK_UPON_ROOT_PATH = false; //unset flag
+		
+		//Check remote mappings in case of update
+		var timediff = now.getTime() - stored_last_check_for_map_update;
+		//console.log('timediff:');
+		//console.log(timediff/60*1000*60);
+		//console.log('stored_last:');
+		//console.log(stored_last_check_for_map_update);
+		//console.log('stored_map:');
+		//console.log(stored_map_date + ' and ' + stored_map_date);
+		//console.log('stored_last:' + stored_last_check_for_map_update); console.log('timediff:' + (timediff > 30*60*1000)); console.log('force:' + SET_SELECTOR_MAPPINGS_FORCED);
+		if((stored_last_check_for_map_update == 0) || (timediff > 30*60*1000) || (SET_SELECTOR_MAPPINGS_FORCED)){ /* 30*60*1000 = 0.5 hour interval*/
+			SET_SELECTOR_MAPPINGS_FORCED = false; //unset flag
+			//console.log('past interval');
+			$.getJSON('https://goldenview.wittman.org/map/current_gplus_mappings.json', function(data){
+				//console.log('ajax map pull:'); console.log(data);
+				var date_right = typeof data['mapping date right'] == 'undefined' ? default_selector_map['mapping date right'] : data['mapping date right'];	
+				var mappings_length = Object.keys(data.mappings).length;
+				//console.log('date_right, default_date');
+				//console.log(date_right); console.log(default_selector_map['mapping date right']);
+				if(date_right > default_selector_map['mapping date right'] && mappings_length > 999 && (!$(SEL.posts).length || !$(SEL.comments_wrap).length || !$(SEL.circle_links).length)){
+					mappings = data.mappings;
+					re_map(mappings);
+					stor_set('GPlus CSS Map', JSON.stringify(mappings));
+					stor_set('GPlus CSS Map Date', date_right);
+					//console.log('update local from remote');
+					//console.log(mappings);
+				}
+			});
+			stor_set('Last Got GPlus CSS Map Date', now.getTime());
+			//console.log('stored:'+now.getTime());
+		}
+		//console.log(mappings);
+	}catch(e){
+		SET_SELECTOR_MAPPINGS_DONE_ONCE = true; //done once, set flag
+		mappings = default_selector_map.mappings; //If all else fails, use included default map file
+		re_map(mappings);
+		//console.log('exception caught, using default');
+		//console.log(e.message);
+		//console.log(mappings);
+	}
+}
+
+var SEL = {};
+var RESUME_MAP_CHECK_UPON_ROOT_PATH = false;
+var SET_SELECTOR_MAPPINGS_DONE_ONCE = false;
+var SET_SELECTOR_MAPPINGS_FORCED = false;
+var SET_SELECTOR_MAPPINGS_FORCED_ONCE = false;
+
+set_selector_mappings();
+
+//console.log('SEL:')
+//console.log(SEL);
+
 function hideComments(hide_by_default){ // v0.2.7
     var logging = false;
 
@@ -10,7 +136,6 @@ function hideComments(hide_by_default){ // v0.2.7
 	    console.log(txt);
 	  }
 	}
-
 	function setItem(key, value) {
 		try{
 			log("Inside setItem: " + key + ":" + value);
@@ -75,7 +200,7 @@ function hideComments(hide_by_default){ // v0.2.7
 		//return update.find('.a-f-i-Xb .tk3N6e-e-vj[role]').length > 0; OLD
 		//return update.find('.l-e-O[role]').length > 0; //OLD
 		//return update.find('.c-m-l[role]').length > 0; //OLD
-        return update.find('.b-n-l[role]').length > 0; //NEW
+        return update.find(SEL.comment_editor_cancel).length > 0; //NEW
 	}
 	function remove_red_color_of_number(comment_count_display){
 		if(comment_count_display.length > 0){
@@ -92,14 +217,15 @@ function hideComments(hide_by_default){ // v0.2.7
 		//$("[id^='update'] .Gq").each(function(){ //OLD
 		//$("[id^='update'] .Ol").each(function(){ //OLD
 		//$("[id^='update'] .Vg").each(function(){ //OLD
-		$("[id^='update'] .Ag").each(function(){ //NEW
+		//$("[id^='update'] .Ag").each(function(){ //NEW
+		$(SEL.comments_wrap).each(function(){ //TMP
 			var t = $(this);
-			var update = t.parentsUntil("[id^='update']");
+			var update = t.parentsUntil(SEL.post);
 			//var plust1_and_comments_link = t.parent().find(".a-f-i-bg"); //OLD
 			//var plust1_and_comments_link = update.find(".Xn"); //OLD
 			//var plust1_and_comments_link = update.find(".Jn"); //OLD
 			//var plust1_and_comments_link = update.find(".ol"); //OLD
-            var plust1_and_comments_link = update.find(".Bl"); //NEW
+            var plust1_and_comments_link = update.find(SEL.plust1_and_comments_link_wrap); //NEW
 			//var comments = update.find('.em');
 			var comments = t; //.find('.Ly');
 
@@ -107,7 +233,7 @@ function hideComments(hide_by_default){ // v0.2.7
 			//var old_comment_count_span = comments.find("div.Lt span[role]"); //OLD
 			//var old_comment_count_span = comments.find("div.Ft span[role]"); //OLD
 			//var old_comment_count_span = comments.find(".xx[role]"); //OLD
-            var old_comment_count_span = comments.find(".Kr[role]"); //NEW
+            var old_comment_count_span = comments.find(SEL.old_comment_count_span); //NEW
 			
 			if( old_comment_count_span.hasClass('gpp__comments_hidden_old_shown') ){
 				old_comment_count_span.addClass('gpp__comments_hidden_old_shown');
@@ -125,7 +251,7 @@ function hideComments(hide_by_default){ // v0.2.7
 			//var recent_comments = update.find('.a-b-f-i-Xb-oa .a-b-f-i-W-r'); //OLD
 			//var recent_comments = update.find('.Gq .Ly'); //OLD
 			//var recent_comments = update.find('.sx'); //OLD
-            var recent_comments = update.find('.mf'); //NEW
+            var recent_comments = update.find(SEL.recent_comments_wrap); //NEW
 			var recent_comment_count = 0;
 			if(recent_comments.length > 0){
 				recent_comment_count = recent_comments.length;
@@ -381,12 +507,12 @@ function defaultCircle(){ // v0.2.5
 		//var circle_links_container = $("#content .a-b-sb-z:first"); //OLD
 		//var circle_links_container = $("#content .a-c-mb-S:first"); //OLD
 		//var circle_links_container = $("#content .a-e-nb-B:first"); //OLD
-        var circle_links_container = $("#content .a-f-ob-B:first"); //NEW
+        var circle_links_container = $(SEL.circle_links_wrap); //NEW
 
 		//var circle_links = $("#content .a-b-sb-z a[href*='stream/']"); //OLD
 		//var circle_links = $("#content .a-mb-k-da a[href*='stream/']"); //OLD
 		//var circle_links = $("#content .a-nb-j-T a[href*='stream/']"); //OLD
-        var circle_links = $("#content .a-ob-j-X a[href*='stream/']"); //NEW
+        var circle_links = $(SEL.circle_links); //NEW
 		
 		var default_circle_url = GM_getValue('gpp__default_circle_url', '');
 		
@@ -398,7 +524,7 @@ function defaultCircle(){ // v0.2.5
 		//Always add star to Stream 
 		//var stream =  $("#content .a-c-mb-S a[href='/stream']:first"); //OLD
 		//var stream =  $("#content .a-e-nb-B a[href='/stream']:first"); //OLD
-        var stream =  $("#content .a-f-ob-B a[href='/stream']:first"); //NEW
+        var stream =  $(SEL.stream_link); //NEW
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
 				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>');
@@ -446,7 +572,7 @@ function defaultCircle(){ // v0.2.5
 		//var stream_active =  $("#content .a-b-sb-z a[href='/stream'].a-sb-k-Ea:first"); //OLD
 		//var stream_active =  $("#content .a-c-mb-C a[href='/stream'].a-mb-k-ua:first"); //OLD
 		//var stream_active =  $("#content .a-e-nb-B a[href='/stream'].a-nb-j-ma:first"); //OLD
-        var stream_active =  $("#content .a-f-ob-B a[href='/stream'].a-ob-j-ia:first"); //NEW
+        var stream_active =  $(SEL.stream_link_active); //NEW
 		
 
 		if( stream_active.length > 0 ){ 
@@ -656,16 +782,16 @@ function userMute(){ // v0.2.3
 		//var posts = $("[id^='update'] .Wh").each(function(){ //OLD
 		//var posts = $("[id^='update'] .zh").each(function(){ //OLD
         //var posts = $("[id^='update'] .tg").each(function(){ //OLD
-        var posts = $("[id^='update'] .Tf").each(function(){ //NEW
+        var posts = $(SEL.posts).each(function(){ //NEW
 			var th = $(this);
 			//var user_link = th.find('.Xy .rE a:first'); //OLD
 			//var user_link = th.find('.IE a:first'); //OLD
 			//var user_link = th.find('.CC a:first'); //OLD
-            var user_link = th.find('.nC a:first'); //NEW
+            var user_link = th.find(SEL.user_link); //NEW
 			//var share_link = th.find('.Mt .vz a:first'); //OLD
 			//var share_link = th.find('.Gt .sz a:first'); //OLD
 			//var share_link = th.find('.Wx a:first'); //OLD 
-            var share_link = th.find('.gx a:first'); //NEW
+            var share_link = th.find(SEL.share_link); //NEW
 			var name = user_link.text();
 			var share_id = typeof share_link.attr('oid') != 'undefined' ? share_link.attr('oid') : '';
 			var id = typeof user_link.attr('oid') != 'undefined' ? user_link.attr('oid') : '';
@@ -680,7 +806,7 @@ function userMute(){ // v0.2.3
 				//th.find('.Xy .ao').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
 				//th.find('.Uy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
 				//th.find('.Ex').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
-                th.find('.Nw').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
+                th.find(SEL.permalink_wrap).append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
 				th.parent().find('.gpp__user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
@@ -739,7 +865,7 @@ function userMute(){ // v0.2.3
 }
 
 function searchWithGoogle(){ // v0.1.7
-	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="a-f-pu-z a-pu-z a-x-z Ka-z-Ka" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>'; //NEW
+	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="' + SEL.search_input_classes + '" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>'; //NEW
 
 	var sbox = $('#search-box').after(search_box_new_html);
 	var sbox_new = $('#ggp__search_with_google');
@@ -1163,6 +1289,22 @@ function hideImages(hide_images_by_default){ // v0.1.8
 
 }
 
+function mapUpdateCheck(){
+	chrome.extension.sendRequest({'name' : 'force_selector_map_update_once'}, function(skip){
+		//console.log('force_selector_map_update_once__skip:'); console.log(skip);
+		if( !skip ){ // && !SET_SELECTOR_MAPPINGS_FORCED_ONCE ){
+			//console.log('past skip');
+			RESUME_MAP_CHECK_UPON_ROOT_PATH = true;
+			SET_SELECTOR_MAPPINGS_FORCED = true;
+			SET_SELECTOR_MAPPINGS_FORCED_ONCE = true;
+		}
+	});
+
+	if(RESUME_MAP_CHECK_UPON_ROOT_PATH){
+		set_selector_mappings();
+	}
+}
+
 function onLoad() {
 	//console.log("Loaded Google+: " + window.location.href);
 	if (!settings) {
@@ -1193,9 +1335,11 @@ function onLoad() {
 					}
 					hideImages(hide_images_by_default);
 				}
-					
+				
 				if (settings.search_with_google)
 					searchWithGoogle();
+					
+				setInterval(mapUpdateCheck, 30000); //always run every 30 seconds)
 			}
 		  });
 	}
