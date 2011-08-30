@@ -88,7 +88,7 @@ function set_selector_mappings(){
 		if((stored_last_check_for_map_update == 0) || (timediff > 30*60*1000) || (SET_SELECTOR_MAPPINGS_FORCED)){ /* 30*60*1000 = 0.5 hour interval*/
 			SET_SELECTOR_MAPPINGS_FORCED = false; //unset flag
 			//console.log('past interval');
-			$.getJSON('https://goldenview.wittman.org/map/current_gplus_mappings.json', function(data){
+			$.getJSON('http://goldenview.wittman.org/map/current_gplus_mappings.json', function(data){
 				//console.log('ajax map pull:'); console.log(data);
 				var date_right = typeof data['mapping date right'] == 'undefined' ? default_selector_map['mapping date right'] : data['mapping date right'];	
 				var mappings_length = Object.keys(data.mappings).length;

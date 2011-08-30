@@ -59,6 +59,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.26
+
+- Chrome having XMLHttpRequest/origin problems with an SSL connection for mapping resource. Switched to HTTP request.
+
 ### Version 1.25
 
 - Robustness update so Golden View can weather Google+ upgrades, which sometimes interrupt normal extension functioning, better. NEW
