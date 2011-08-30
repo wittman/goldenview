@@ -1243,14 +1243,14 @@ function hideImages(hide_images_by_default){ // v0.1.8
 				t.addClass('gpp__hide_images_tagged');
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="background:url(' + chrome.extension.getURL('icon.camera.png') + ') no-repeat; margin:7px 9px; height:auto;width: 91%;background-position-y:0px; height:1.2em; float:left; background-color:rgb(240,240,240)" class="gpp__hide_images"><span role="button" tabindex="0"><span style="margin-top:0px" class="" title="Hidden image"></span><span style="font-size:9px; padding-top:2px; margin:0px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW Lr9 Hw i-wa-m-v
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="background:url(' + chrome.extension.getURL('icon.camera.png') + ') no-repeat; margin:7px 9px; height:auto;width: 91%;background-position-y:0px; height:1.2em; float:left;background-color:whiteSmoke" class="gpp__hide_images"><span role="button" tabindex="0"><span style="margin-top:0px" class="" title="Hidden image"></span><span style="font-size:9px; padding-top:2px; margin:0px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW Lr9 Hw i-wa-m-v
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.hover(function(){
-					$(this).css('background-color', 'whiteSmoke');
+					$(this).css('background-color', 'rgb(225,225,225)');
 				},
 				function(){
-					$(this).css('background-color', 'inherit');
+					$(this).css('background-color', 'whiteSmoke');
 				});
 				button.click(function(){
 					if( img.is(':visible') ){
