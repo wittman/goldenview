@@ -8,7 +8,7 @@ function re_map(mappings){
 		'post' : "[id^='update-']", //"[id^='update-']"
 		'posts' : m['XVDd7kiawTA9Z68I'], //".tn"
 		'comments_wrap' : m['nqBp6N6dKqueig2R'], //".Ij"
-		'comment_editor_cancel' : m['KGafpX8THW0zZ9Jq'], //'.b-n-l'
+		'comment_editor_cancel' : "[id*='.cancel']", //[id*='.cancel']
 		'plust1_and_comments_link_wrap' : m['YAnwDHrlMoy67el9'], //".Bl"
 		'old_comment_count_span' : m['9Iug6cv5o3NgTEEv'], //".Gw"
 		'recent_comments_wrap' : m['CgYb1dbCZGVfpUAj'], //'.mf'
@@ -18,7 +18,8 @@ function re_map(mappings){
 		'stream_link_active' : "#content " + m['XLINtDfuUFUIgeVl'] + " + a[href='/stream']" + m['oL8HuLz0SCCVwtPK'] + ":first", //"#content .a-f-ob-B a[href='/stream'].a-ob-j-ia:first"
 		'user_link' : m['tuVm7xq63YKbjl9u'] + ' a:first', //'.Nw a:first'
 		'share_link' : m['xG7OYDQoYoP4QS0R'] + ' a:first', //'.gx a:first'
-		'permalink_wrap' : m['tuVm7xq63YKbjl9u'], //'.Nw'
+		'permalink_wrap' : m['tuVm7xq63YKbjl9u'], //'.Nw',
+		'img_divs' :  "#content " + m['rWCWLOSJ4yQRU41j'] + "[data-content-url]", //#contentPane .F-y-Ia[data-content-url]
 		'search_input_classes' : m['ikY6QG1yVApfM0ib'].replace('.','') + ' ' + m['9WbMI68ODRm5sxgV'].replace('.','') + ' ' + m['QvnLjkPdyzwsVmEq'].replace('.',''), //'a-pu-z a-x-z Ka-z-Ka'
 		'___' : ''
 	};
@@ -270,7 +271,8 @@ function hideComments(hide_by_default){ // v0.2.7
 				
 				if( !comments.hasClass('gpp__comments') ){
 					comments.addClass('gpp__comments');
-					button_html = '<br><span role="button" class="b-j gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					//button_html = '<br><span role="button" class="b-j gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					button_html = '<br><a class="gpp__comment_show_hide" tabindex="0">Hide Comments</a> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
@@ -1220,14 +1222,14 @@ function hideImages(hide_images_by_default){ // v0.1.8
 	//var img_divs = $('#contentPane .P-I-ba[data-content-url]'); //OLD
 	//var img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
 	//var img_divs = $('#contentPane .H-y-qa[data-content-url]'); //OLD
-    var img_divs = $('#contentPane .F-y-Ia[data-content-url]'); //NEW
+    var img_divs = $(SEL.img_divs); //$('#contentPane .F-y-Ia[data-content-url]'); //NEW
 	
 	/****** Loop ******/
 	function main_loop(){
 		
 		//img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
 		//img_divs = $('#contentPane .H-y-qa[data-content-url]'); //OLD
-        img_divs = $('#contentPane .F-y-Ia[data-content-url]'); //NEW
+        img_divs = $(SEL.img_divs); //$('#contentPane .F-y-Ia[data-content-url]'); //NEW
 
 		img_count = img_divs.length;
 			
@@ -1241,7 +1243,7 @@ function hideImages(hide_images_by_default){ // v0.1.8
 				t.addClass('gpp__hide_images_tagged');
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images Lr9 Hw i-wa-m-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW
+				t.after('<div id="gpp__hide_images_button_' + i + '" style="background:url(' + chrome.extension.getURL('icon.camera.png') + ') no-repeat; margin:7px 9px; height:auto;width: 91%;background-position-y:0px; height:1.2em; float:left; background-color:rgb(240,240,240)" class="gpp__hide_images"><span role="button" tabindex="0"><span style="margin-top:0px" class="" title="Hidden image"></span><span style="font-size:9px; padding-top:2px; margin:0px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW Lr9 Hw i-wa-m-v
 				var img = t;
 				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
 				button.hover(function(){
