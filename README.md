@@ -59,7 +59,7 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
-### Version 1.27
+### Version 1.28
 
 - Fixed Hide Images module. FIX
 - Tweaked Hide Comments back to blue link. FIX
