@@ -59,6 +59,11 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.29
+
+- Bandwidth efficiency enhancement: The auto-remapping (self-healing) system now checks a remote file that contains only date string timestamp and based on that requests the full CSS map resource if needed. NEW
+- Added the following crowd-sourced language translations <http://go.wittman.org/g592> (for User Mute UI): nb-NO [Norsk bokmål (Norway)], and de-D [Deutsch (Deutschland)]. NEW
+
 ### Version 1.28
 
 - Fixed Hide Images module. FIX

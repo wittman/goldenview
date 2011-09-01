@@ -89,19 +89,25 @@ function set_selector_mappings(){
 		if((stored_last_check_for_map_update == 0) || (timediff > 30*60*1000) || (SET_SELECTOR_MAPPINGS_FORCED)){ /* 30*60*1000 = 0.5 hour interval*/
 			SET_SELECTOR_MAPPINGS_FORCED = false; //unset flag
 			//console.log('past interval');
-			$.getJSON('http://goldenview.wittman.org/map/current_gplus_mappings.json', function(data){
-				//console.log('ajax map pull:'); console.log(data);
-				var date_right = typeof data['mapping date right'] == 'undefined' ? default_selector_map['mapping date right'] : data['mapping date right'];	
-				var mappings_length = Object.keys(data.mappings).length;
-				//console.log('date_right, default_date');
-				//console.log(date_right); console.log(default_selector_map['mapping date right']);
-				if(date_right > default_selector_map['mapping date right'] && mappings_length > 999 && (!$(SEL.posts).length || !$(SEL.comments_wrap).length || !$(SEL.circle_links).length)){
-					mappings = data.mappings;
-					re_map(mappings);
-					stor_set('GPlus CSS Map', JSON.stringify(mappings));
-					stor_set('GPlus CSS Map Date', date_right);
-					//console.log('update local from remote');
-					//console.log(mappings);
+			$.get('http://goldenview.wittman.org/map/current_gplus_mappings_timestamp.txt', function(data){
+				//console.log(data);
+				var remote_date = data;
+				if((remote_date.length > 8 && remote_date.length < 16 && remote_date[0] == 2) && (remote_date > default_selector_map['mapping date right'])){ //2010-01-01.123
+					$.getJSON('http://goldenview.wittman.org/map/current_gplus_mappings.json', function(data){
+						//console.log('ajax map pull:'); console.log(data);
+						var date_right = typeof data['mapping date right'] == 'undefined' ? default_selector_map['mapping date right'] : data['mapping date right'];	
+						var mappings_length = Object.keys(data.mappings).length;
+						//console.log('date_right, default_date');
+						//console.log(date_right); console.log(default_selector_map['mapping date right']);
+						if(date_right > default_selector_map['mapping date right'] && mappings_length > 999 && (!$(SEL.posts).length || !$(SEL.comments_wrap).length || !$(SEL.circle_links).length)){
+							mappings = data.mappings;
+							re_map(mappings);
+							stor_set('GPlus CSS Map', JSON.stringify(mappings));
+							stor_set('GPlus CSS Map Date', date_right);
+							//console.log('update local from remote');
+							//console.log(mappings);
+						}
+					});
 				}
 			});
 			stor_set('Last Got GPlus CSS Map Date', now.getTime());
@@ -728,22 +734,30 @@ function userMute(){ // v0.2.3
 		var lang = {
 			'unmute' : {
 				'en-US' : 'UNMUTE',
+				'de-DE' : 'STUMM ABSCHALTEN',
+				'nb-NO' : 'VIS MELDINGER',
 				'sv-SE' : 'VISA MEDDELANDEN',
 				'xx-XX' : '_____'
 			},
 			'muted_share' : {
 				'en-US' : 'MUTED SHARE',
+				'de-DE' : 'ORIGINAL POSTER STUMM GESCHALTET',
+				'nb-NO' : 'SKJULT DELT MELDING',
 				'sv-SE' : 'DOLT DELAT MEDDELANDE',
 				'xx-XX' : '_____'
 			},
 			'see_original' : {
 				'en-US' : 'SEE ORIGINAL POSTER TO UNMUTE',
-				'sv-SE' : 'VISA ORIGINALSKRIBENTEN FÃƒâ€“R DET DOLDA MEDDELANDET',
+				'de-DE' : 'GEHE ZUM ORIGINAL POSTER UM STUMM ABZUSCHALTEN',
+				'nb-NO' : 'GÅ TIL OPPRINNELIG BRUKER FOR Å VISE MELDINGEN',
+				'sv-SE' : 'VISA ORIGINALSKRIBENTEN FÖR DET DOLDA MEDDELANDET',
 				'xx-XX' : '_____'
 			},
 			'mute_user' : {
 				'en-US' : 'MUTE USER',
-				'sv-SE' : 'DÃƒâ€“LJ ANVÃƒâ€žNDAREN',
+				'de-DE' : 'STUMM SCHALTEN',
+				'nb-NO' : 'SKJUL MELDINGER',
+				'sv-SE' : 'DÖLJ ANVÄNDAREN',
 				'xx-XX' : '_____'
 			}
 		}
