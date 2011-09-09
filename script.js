@@ -456,7 +456,7 @@ function defaultCircle(){ // v0.2.5
 		var t = $(that);
 		var circle_link = t;
 		if(t.parent().find('.gpp__default_circle').length == 0){
-			t.prepend(' <a style="font-size:9px;position:absolute;margin-left:-34px;" class="gpp__default_circle">' + STAR_OUTLINE + '</a>');
+			t.prepend(' <a style="font-size:9px;position:absolute;margin-left:-12px;" class="gpp__default_circle">' + STAR_OUTLINE + '</a>'); //-14 > -12
 			var set_button = t.parent().find('.gpp__default_circle:first');
 			set_button.click(function(){
 				var t = $(this);
@@ -468,10 +468,10 @@ function defaultCircle(){ // v0.2.5
 			})
 			.hover(
 				function(){
-					$(this).empty().append('SET ' + STAR_HOVER_SOLID).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-70px'});
+					$(this).empty().append('SET ' + STAR_HOVER_SOLID).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-50px'});
 				},
 				function(){
-					$(this).empty().append(STAR_OUTLINE).css({'fontSize':'9px','color':'#36C','marginLeft':'-32px'});
+					$(this).empty().append(STAR_OUTLINE).css({'fontSize':'9px','color':'#36C','marginLeft':'-12px'}); //-32 > -12
 				}
 			);
 		}
@@ -489,7 +489,7 @@ function defaultCircle(){ // v0.2.5
 	function process_circles(t, default_circle_url, circle_link){
 		//Process Circles
 		if( default_circle_url == circle_link.attr('href') && t.find('.gpp__default_circle').length == 0 ){
-			t.prepend(' <a style="font-size:9px;position:absolute;margin-left:-34px;" class="gpp__default_circle">' + STAR_SOLID + '</a>');
+			t.prepend(' <a style="font-size:9px;position:absolute;margin-left:-12px;" class="gpp__default_circle">' + STAR_SOLID + '</a>'); //-14 > -12
 			var set_button = t.parent().find('.gpp__default_circle:first');
 			set_button.click(function(){
 				var t = $(this);
@@ -500,10 +500,10 @@ function defaultCircle(){ // v0.2.5
 			})
 			.hover(
 				function(){
-					$(this).empty().append('UN-SET ' + STAR_HOVER_OUTLINE).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-97px'});
+					$(this).empty().append('UN-SET ' + STAR_HOVER_OUTLINE).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-77px'}); //-97 > -77
 				},
 				function(){
-					$(this).empty().append(STAR_SOLID).css({'fontSize':'9px','color':'#36C','marginLeft':'-32px'});
+					$(this).empty().append(STAR_SOLID).css({'fontSize':'9px','color':'#36C','marginLeft':'-12px'}); //-32 > -12
 				}
 			);
 		}else{
@@ -535,7 +535,7 @@ function defaultCircle(){ // v0.2.5
         var stream =  $(SEL.stream_link); //NEW
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
-				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>');
+				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-2px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>'); //-4 > -2
 				var set_button = stream.parent().find('.gpp__default_circle:first');
 				set_button.click(function(){
 					GM_removeItem('gpp__default_circle_url');
@@ -544,7 +544,7 @@ function defaultCircle(){ // v0.2.5
 				})
 				.hover(
 					function(){
-						$(this).empty().append('UN-SET ' + STAR_HOVER_OUTLINE).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-66px','paddingTop':'3px'});
+						$(this).empty().append('UN-SET ' + STAR_HOVER_OUTLINE).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-66px','paddingTop':'3px'}); //-66 > -46
 					},
 					function(){
 						$(this).empty().append(STAR_SOLID).css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
@@ -553,7 +553,7 @@ function defaultCircle(){ // v0.2.5
 			}
 		}else{
 			if(stream.parent().find('.gpp__default_circle').length == 0){
-				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-4px;padding-top:7px" class="gpp__default_circle">' + STAR_OUTLINE + '</a>');
+				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-2px;padding-top:7px" class="gpp__default_circle">' + STAR_OUTLINE + '</a>'); // -4 > -2
 				var set_button = stream.parent().find('.gpp__default_circle:first');
 				set_button.click(function(){
 					GM_setValue('gpp__default_circle_url', '/stream');
