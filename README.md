@@ -59,6 +59,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.31
+
+- Default Circle redirect was not triggering. Fixed, and clicking Stream itself (just like UNSET star) now unsets the current default circle.  FIX
+
 ### Version 1.30
 
 - Default Circle star alignments fixed. Was uneven and disappearing off left margin. Updated bundled CSS map.  FIX

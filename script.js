@@ -99,11 +99,18 @@ function set_selector_mappings(){
 						var mappings_length = Object.keys(data.mappings).length;
 						//console.log('date_right, default_date');
 						//console.log(date_right); console.log(default_selector_map['mapping date right']);
-						if(date_right > default_selector_map['mapping date right'] && mappings_length > 999 && (!$(SEL.posts).length || !$(SEL.comments_wrap).length || !$(SEL.circle_links).length)){
+						//console.log('mappings_length:'); console.log(mappings_length);
+						//console.log($(SEL.stream_link));
+						//console.log($(SEL.posts));
+						//console.log($(SEL.comments_wrap));
+						//console.log($(SEL.circle_links));
+						if(date_right > default_selector_map['mapping date right'] && mappings_length > 999 && (!$(SEL.stream_link.length) || !$(SEL.posts).length || !$(SEL.comments_wrap).length || !$(SEL.circle_links).length)){
 							mappings = data.mappings;
 							re_map(mappings);
 							stor_set('GPlus CSS Map', JSON.stringify(mappings));
 							stor_set('GPlus CSS Map Date', date_right);
+							//console.log('date_right:');
+							//console.log(date_right);
 							//console.log('update local from remote');
 							//console.log(mappings);
 						}
@@ -533,6 +540,12 @@ function defaultCircle(){ // v0.2.5
 		//var stream =  $("#content .a-c-mb-S a[href='/stream']:first"); //OLD
 		//var stream =  $("#content .a-e-nb-B a[href='/stream']:first"); //OLD
         var stream =  $(SEL.stream_link); //NEW
+
+		stream.click(function(){
+			GM_setValue('gpp__default_circle_url', '/stream');
+		});
+		
+		//console.log(stream);
 		if(default_circle_url == '/stream'){
 			if(stream.parent().find('.gpp__default_circle').length == 0){
 				stream.before(' <a style="font-size:9px;position:absolute;margin-left:-2px;padding-top:7px" class="gpp__default_circle">' + STAR_SOLID + '</a>'); //-4 > -2
@@ -595,10 +608,13 @@ function defaultCircle(){ // v0.2.5
 						empty_star_inserts(this);
 					}
 				});
+				//console.log('default_circle_url:' + default_circle_url);
 				if( default_circle_url != '' && default_circle_url != '/stream'){
 					if( !allow_stream ){
+						//console.log('!allow_stream');
 						window.location.href = default_circle_url;
 					}else{
+						//console.log('allow_stream');
 						allow_stream = false;
 					}
 				}
@@ -630,6 +646,14 @@ function defaultCircle(){ // v0.2.5
 				}
 				//Process Circles
 				process_circles(t, default_circle_url, circle_link);
+				
+				//console.log('non-active-stream default_circle_url:' + default_circle_url);
+				var path = window.location.pathname;
+				//console.log(path); console.log(default_circle_url);
+				if((path == '/' || path == '/u/0/') && path != '/stream' && default_circle_url != '' && default_circle_url != '/stream'){
+					window.location.href = default_circle_url;
+				}
+				
 			});
 		}
 	}
@@ -644,6 +668,7 @@ function defaultCircle(){ // v0.2.5
 	
 	/****** Start main_loop ******/
 	setInterval(main_loop, 2000);
+	//main_loop();
 }
 
 function userMute(){ // v0.2.3
