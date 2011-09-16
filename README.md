@@ -59,6 +59,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 ## Change Log
 
+### Version 1.32
+
+- Search with Google - Google+ search input ID changed which made the TOGGLE SEARCH TYPE link disappear. Fixed. FIX
+
 ### Version 1.31
 
 - Default Circle redirect was not triggering. Fixed, and clicking Stream itself (just like UNSET star) now unsets the current default circle.  FIX

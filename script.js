@@ -21,6 +21,7 @@ function re_map(mappings){
 		'permalink_wrap' : m['tuVm7xq63YKbjl9u'], //'.Nw',
 		'img_divs' :  "#content " + m['rWCWLOSJ4yQRU41j'] + "[data-content-url]", //#contentPane .F-y-Ia[data-content-url]
 		'search_input_classes' : m['ikY6QG1yVApfM0ib'].replace('.','') + ' ' + m['9WbMI68ODRm5sxgV'].replace('.','') + ' ' + m['QvnLjkPdyzwsVmEq'].replace('.',''), //'a-pu-z a-x-z Ka-z-Ka'
+		'search_input' : '#searchBox',
 		'___' : ''
 	};
 }
@@ -906,9 +907,9 @@ function userMute(){ // v0.2.3
 }
 
 function searchWithGoogle(){ // v0.1.7
-	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="' + SEL.search_input_classes + '" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>'; //NEW
+	var search_box_new_html = '<form style="display:none" id="ggp__search_with_google" method="get" action="http://www.google.com/search?" target="_blank"><input type="hidden" name="hl" value="en-GB"><input type="hidden" name="q" value="site:plus.google.com -buzz -&quot;google reader&quot;"><input class="' + SEL.search_input_classes + '" id="gpp__search-box" autocomplete="off" type="text" maxlength="2048" name="q" value="Search with Google" placeholder="Search with Google"></form> <a style="float:right;font-weight:bold;font-size:9px;margin-left:-11.5em;" id="gpp__search_with_google_swap">TOGGLE SEARCH TYPE</a>'; //NEW
 
-	var sbox = $('#search-box').after(search_box_new_html);
+	var sbox = $(SEL.search_input).after(search_box_new_html);
 	var sbox_new = $('#ggp__search_with_google');
 
 	$('#gpp__search-box').focus(function(){
