@@ -3,10 +3,10 @@
 ***Golden View for Google+*** is a Chrome extension with 5 (optionally enabled) modules:
 
   1. **User Mute** - Mutes all posts by specific users.
-  2. **Default Circle** – Set a circle as default (instead of Stream).
+  2. **Default Circle** – Set a circle as default (instead of Stream). [FEATURE SUSPENDED]
   3. **Hide Images** – Hide image: original and all shares.
   4. **Hide Comments** – Hide comments (option hide all by default).
-  5. **Search With Google** – Search Google+ with Google Search.
+  5. **Search With Google** – Search Google+ with Google Search. [FEATURE SUSPENDED]
 
 
 Each module is based on a self-contained user script, also authored by Micah Wittman, developed and maintained for cross-platform use (Chrome, Firefox, and Safari). See more information about a module by going to it's code repository as linked to below.
@@ -58,6 +58,10 @@ Credit and special thanks goes to Matt Mastracci <http://grack.com/+> for his ex
 
 
 ## Change Log
+
+### Version 1.33
+
+- Google's UI refresh (aka Operation '#whitespace') broke most functionality. Modules: User Mute, Hide Images, and Hide Comments have been restored. Modules Search with Google and Default Circle are not operational and suspended indefinitely. Fixed. FIX
 
 ### Version 1.32
 

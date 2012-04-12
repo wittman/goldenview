@@ -6,7 +6,7 @@ function re_map(mappings){
 	var m = mappings;
 	SEL = {
 		'post' : "[id^='update-']", //"[id^='update-']"
-		'posts' : m['XVDd7kiawTA9Z68I'], //".tn"
+		'posts' : m['60iYenrdJ5FgblMg'], //"[id^='update-'] > div", //m['XVDd7kiawTA9Z68I'], //".tn"
 		'comments_wrap' : m['nqBp6N6dKqueig2R'], //".Ij"
 		'comment_editor_cancel' : "[id*='.cancel']", //[id*='.cancel']
 		'plust1_and_comments_link_wrap' : m['YAnwDHrlMoy67el9'], //".Bl"
@@ -16,10 +16,12 @@ function re_map(mappings){
 		'circle_links' : "#content " + m['NCQTv2BvLd3MFT9q'].replace(':hover','') + " a[href*='stream/']", //"#content .a-ob-j-X a[href*='stream/']"
 		'stream_link' : "#content " + m['XLINtDfuUFUIgeVl'] + " + a[href='/stream']:first", //"#content .a-ob-Fd a[href='/stream']:first"
 		'stream_link_active' : "#content " + m['XLINtDfuUFUIgeVl'] + " + a[href='/stream']" + m['oL8HuLz0SCCVwtPK'] + ":first", //"#content .a-f-ob-B a[href='/stream'].a-ob-j-ia:first"
-		'user_link' : m['tuVm7xq63YKbjl9u'] + ' a:first', //'.Nw a:first'
-		'share_link' : m['xG7OYDQoYoP4QS0R'] + ' a:first', //'.gx a:first'
-		'permalink_wrap' : m['tuVm7xq63YKbjl9u'], //'.Nw',
-		'img_divs' :  "#content " + m['rWCWLOSJ4yQRU41j'] + "[data-content-url]", //#contentPane .F-y-Ia[data-content-url]
+		'user_link' : m['90iYenrdJ5FgblMg'] + ' a:first', //'.Nw a:first'
+		'share_link' : m['90iYenrdJ5FgblMg'] + ' a:first', //'.gx a:first'
+		'post_header' : m['90iYenrdJ5FgblMg'] + ' header',
+		'permalink_wrap' : m['90iYenrdJ5FgblMg'], //'.Nw',
+		'img_divs' :  m['70iYenrdJ5FgblMg'], //"#content " + m['rWCWLOSJ4yQRU41j'] + "[data-content-url]", //#contentPane .F-y-Ia[data-content-url]
+		'img_show_hide_wrap' : m['80iYenrdJ5FgblMg'],
 		'search_input_classes' : m['ikY6QG1yVApfM0ib'].replace('.','') + ' ' + m['9WbMI68ODRm5sxgV'].replace('.','') + ' ' + m['QvnLjkPdyzwsVmEq'].replace('.',''), //'a-pu-z a-x-z Ka-z-Ka'
 		'search_input' : '#searchBox',
 		'___' : ''
@@ -34,6 +36,11 @@ function set_selector_mappings(){
 		stor_del('Last Got GPlus CSS Map Date');
 		stor_del('GPlus CSS Map Date');
 		return;*/
+		
+		//mappings = default_selector_map.mappings; //If all else fails, use included default map file #new
+		//re_map(mappings); //#new
+		//return; //#new
+		
 		
 		//var now = new Date("August 25, 2011 22:27:00"); //new Date();
 		var now = new Date();
@@ -286,7 +293,7 @@ function hideComments(hide_by_default){ // v0.2.7
 				if( !comments.hasClass('gpp__comments') ){
 					comments.addClass('gpp__comments');
 					//button_html = '<br><span role="button" class="b-j gpp__comment_show_hide" tabindex="0">Hide Comments</span> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
-					button_html = '<br><a class="gpp__comment_show_hide" tabindex="0">Hide Comments</a> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
+					button_html = '<br><a class="gpp__comment_show_hide" tabindex="0" style="margin-left:1.5em">Hide Comments</a> <span style="font-size:10pt;color:#999" class="gpp__comment_count_container"></span><br><br>';
 					comments.after(button_html);
 
 					//console.log('editor_present:'+editor_present);
@@ -640,7 +647,7 @@ function defaultCircle(){ // v0.2.5
 							$(this).empty().append('SET ' + STAR_HOVER_SOLID).css({'fontSize':'15px','color':'#DD4B39','marginLeft':'-136px','paddingTop':'2px'});
 						},
 						function(){
-							//$(this).empty().append('Ã¢Ëœâ€ ').css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
+							//$(this).empty().append('Ã¢Ëœâ€ ').css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
 							$(this).empty().append(STAR_OUTLINE).css({'fontSize':'9px','color':'#36C','marginLeft':'-2px','paddingTop':'6px'});
 						}
 					);
@@ -830,6 +837,7 @@ function userMute(){ // v0.2.3
 			//var user_link = th.find('.IE a:first'); //OLD
 			//var user_link = th.find('.CC a:first'); //OLD
             var user_link = th.find(SEL.user_link); //NEW
+			//console.log(SEL.user_link);
 			//var share_link = th.find('.Mt .vz a:first'); //OLD
 			//var share_link = th.find('.Gt .sz a:first'); //OLD
 			//var share_link = th.find('.Wx a:first'); //OLD 
@@ -848,7 +856,8 @@ function userMute(){ // v0.2.3
 				//th.find('.Xy .ao').after(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
 				//th.find('.Uy').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
 				//th.find('.Ex').append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //OLD
-                th.find(SEL.permalink_wrap).append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
+                //th.find(SEL.permalink_wrap).append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
+				th.find(SEL.post_header).append(' &nbsp;<a style="font-size:10px" class="gpp__user_mute_mute">' + t('mute_user') + '</a>'); //NEW
 				th.parent().find('.gpp__user_mute_mute:first').click(function(){
 					//Mute
 					th.fadeOut();
@@ -1270,22 +1279,28 @@ function hideImages(hide_images_by_default){ // v0.1.8
 		//img_divs = $('#contentPane .O-F-X[data-content-url]'); //OLD
 		//img_divs = $('#contentPane .H-y-qa[data-content-url]'); //OLD
         img_divs = $(SEL.img_divs); //$('#contentPane .F-y-Ia[data-content-url]'); //NEW
-
+		
+		//console.log(img_divs);
+		
 		img_count = img_divs.length;
 			
 		img_divs.each(function(){
 			var t = $(this);
-			var img_url = t.attr('data-content-url');
+			//var img_url = t.attr('data-content-url');
+			var img = t.find('img:first'); //#new
+			var imgs_container = img.parent().parent().parent(); //#new
+			var img_url = img.attr('src'); //#new
 			var url_hash;
 			if( !t.hasClass('gpp__hide_images_tagged') && !isThumbnail(t) ){
 				//Process new images
 				url_hash = md5(img_url);
 				t.addClass('gpp__hide_images_tagged');
 				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height: 5px;width: 91%;" class="gpp__hide_images Ah Ft h-na-o-z"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-3px 0 0 20px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
-				//t.after('<div id="gpp__hide_images_button_' + i + '" style="margin:7px 9px; height:auto;width: 91%;background-position-y:-201px;float:left" class="gpp__hide_images ns yx Fv h-ga-o-v"><span role="button" tabindex="0"><span style="margin-top:-5px" class="" title="Hidden image"></span><span style="font-size:9px; margin:-5px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //OLD
-				t.after('<div id="gpp__hide_images_button_' + i + '" style="background:url(' + chrome.extension.getURL('icon.camera.png') + ') no-repeat; margin:7px 9px; height:auto;width: 91%;background-position-y:0px; height:1.2em; float:left;background-color:whiteSmoke" class="gpp__hide_images"><span role="button" tabindex="0"><span style="margin-top:0px" class="" title="Hidden image"></span><span style="font-size:9px; padding-top:2px; margin:0px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW Lr9 Hw i-wa-m-v
-				var img = t;
-				var button = img.parent().find('#gpp__hide_images_button_' + i + ':first');
+				var ish_wrap = t.parent().parent().parent().parent().parent().parent().parent().parent().find(SEL.img_show_hide_wrap);
+				ish_wrap.append('<div id="gpp__hide_images_button_' + i + '" style="background:url(' + chrome.extension.getURL('icon.camera.png') + ') no-repeat; margin:-19px 137px; height:auto;width: 88px;background-position-y:0px; height:1.2em; float:left;background-color:whiteSmoke" class="gpp__hide_images"><span role="button" tabindex="0"><span style="margin-top:0px" class="" title="Hidden image"></span><span style="font-size:9px; padding-top:2px; margin:0px 0 0 22px;position:absolute"><a>SHOW / HIDE</a></span></span></div>'); //NEW Lr9 Hw i-wa-m-v
+
+				//var img = t;
+				var button = ish_wrap.find('#gpp__hide_images_button_' + i + ':first');
 				button.hover(function(){
 					$(this).css('background-color', 'rgb(225,225,225)');
 				},
@@ -1293,7 +1308,7 @@ function hideImages(hide_images_by_default){ // v0.1.8
 					$(this).css('background-color', 'whiteSmoke');
 				});
 				button.click(function(){
-					if( img.is(':visible') ){
+					if( imgs_container.is(':visible') ){
 						//Hide
 						GM_setValue('gpp__hidden_img_url_' + url_hash, true);
 					}else{
@@ -1301,22 +1316,22 @@ function hideImages(hide_images_by_default){ // v0.1.8
 						GM_removeItem('gpp__hidden_img_url_' + url_hash);
 					}
 					//Toggle show/hide
-					img.toggle();
+					imgs_container.toggle();
 				});
 				i++;
 			}else{
 				//Process existing images
-				if( t.is(':visible') ){
+				if( imgs_container.is(':visible') ){
 					if(hide_images_by_default){
-						if(!t.hasClass('gpp__hide_images_tagged_shown')){
-							t.addClass('gpp__hide_images_tagged_shown');
-							t.hide();
+						if(!imgs_container.hasClass('gpp__hide_images_tagged_shown')){
+							imgs_container.addClass('gpp__hide_images_tagged_shown');
+							imgs_container.hide();
 						}
 					}else{
 						url_hash = md5(img_url);
 						var hidden_img_url = GM_getValue('gpp__hidden_img_url_' + url_hash, false);
 						if(hidden_img_url){
-							t.hide();
+							imgs_container.hide();
 						}
 					}
 				}
@@ -1357,8 +1372,9 @@ function onLoad() {
 				//console.log(settings);
 			 	  if (settings.user_mute)
 					userMute();
-				if (settings.default_circle)
-					defaultCircle();
+					
+				/*if (settings.default_circle)
+					defaultCircle();*/
 					
 				var hide_comments_by_default = false;
 				if (settings.hide_comments == chrome.i18n.getMessage("options_hide_comments_default_show")
@@ -1378,8 +1394,8 @@ function onLoad() {
 					hideImages(hide_images_by_default);
 				}
 				
-				if (settings.search_with_google)
-					searchWithGoogle();
+				/*if (settings.search_with_google)
+					searchWithGoogle();*/
 					
 				setInterval(mapUpdateCheck, 30000); //always run every 30 seconds)
 			}

@@ -9,14 +9,14 @@ this.manifest = {
 	  "type": "checkbox",
 	  "label": chrome.i18n.getMessage("options_user_mute")
 	},
-
-	{
+	
+	/*{
 	  "tab": chrome.i18n.getMessage("options"),
 	  "group": chrome.i18n.getMessage("options_features"),
 	  "name": "default_circle",
 	  "type": "checkbox",
 	  "label": chrome.i18n.getMessage("options_default_circle")
-	},
+	},*/
 	{
 		"tab": chrome.i18n.getMessage("options"),
 		"group": chrome.i18n.getMessage("options_features"),
@@ -41,13 +41,13 @@ this.manifest = {
 			[chrome.i18n.getMessage("options_hide_images_disable")]
 		]
 	},
-	{
+	/*{
 	  "tab": chrome.i18n.getMessage("options"),
 	  "group": chrome.i18n.getMessage("options_features"),
 	  "name": "search_with_google",
 	  "type": "checkbox",
 	  "label": chrome.i18n.getMessage("options_search_with_google")
-	},
+	},*/
 	{
 	  "tab": chrome.i18n.getMessage("options"),
 	  "group": chrome.i18n.getMessage("options_resource_update"),
